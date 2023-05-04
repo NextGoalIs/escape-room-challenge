@@ -2,9 +2,7 @@ package utils
 
 import "strings"
 
-const INTERVAL = 80
-
-func PrintStringCenter(s string) string {
+func GetStringCenter(s string, INTERVAL int) string {
 	if len(s) >= INTERVAL {
 		return s
 	}
