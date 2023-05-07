@@ -29,7 +29,7 @@ func main() {
 			break
 		} 
 
-		thisRoom := defaultMap[nowX][nowY]
+		thisRoom := &defaultMap[nowX][nowY]
 
 		if thisRoom.IsGoal {
 			printHelloWorld()
