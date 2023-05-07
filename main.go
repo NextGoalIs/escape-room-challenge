@@ -32,7 +32,7 @@ func main() {
 		thisRoom := &defaultMap[nowX][nowY]
 
 		if thisRoom.IsGoal {
-			printHelloWorld()
+			printWIN()
 			break
 		}
 
@@ -144,7 +144,7 @@ func main() {
 
 }
 
-func printHelloWorld() {
+func printWIN() {
 	fmt.Println(`_    _  _____  _   _ 
 | |  | ||_   _|| \ | |
 | |  | |  | |  |  \| |
