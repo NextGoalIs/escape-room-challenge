@@ -23,16 +23,16 @@ func main() {
 
 		systemMessage := ""
 
-		_,ok := interface{}(defaultMap[nowX][nowY]).(mapObjects.Room)
+		_, ok := interface{}(defaultMap[nowX][nowY]).(mapObjects.Room)
 		if !ok {
 			fmt.Println("Error")
 			break
-		} 
+		}
 
 		thisRoom := &defaultMap[nowX][nowY]
 
 		if thisRoom.IsGoal {
-			printWIN()
+			utils.PrintWIN()
 			break
 		}
 
@@ -40,11 +40,11 @@ func main() {
 		case 0:
 		case 1:
 			systemMessage = "열쇠를 획득했다."
-		thisRoom.ItemType = 0
+			thisRoom.ItemType = 0
 			myItems = append(myItems, "열쇠")
 		case 2:
 			systemMessage = "망치를 획득했다."
-		thisRoom.ItemType = 0
+			thisRoom.ItemType = 0
 			myItems = append(myItems, "망치")
 		default:
 		}
@@ -54,101 +54,53 @@ func main() {
 
 		var ableCommands []string
 
-		if (nowY+1 < len(defaultMap[nowX])) && defaultMap[nowX][nowY+1].Name != "" {
-			east = defaultMap[nowX][nowY+1]
-			// canMoveEast = true
-			ableCommands = append(ableCommands, "동")
+		east, ableCommands, west, south, north = utils.MakeConsoleMap(defaultMap, nowX, nowY, east, ableCommands, west, south, north)
 
-		} else {
-			wall := mapObjects.Room{Name: "🚧"}
-			east = wall
-		}
+		var selectedCommand string
 
-		if (nowY-1 >= 0) && defaultMap[nowX][nowY-1].Name != "" {
-			west = defaultMap[nowX][nowY-1]
-			// canMoveWest = true
-			ableCommands = append(ableCommands, "서")
+		ableCommandsString := strings.Join(ableCommands, ", ")
+		myItemsString := strings.Join(myItems, ", ")
 
-		} else {
-			wall := mapObjects.Room{Name: "🚧"}
-			west = wall
-		}
+	CommandSwitch:
+		utils.ClearConsoleWindows()
+		fmt.Println(systemMessage) //시스템
+		println(utils.GetStringCenter(north.GetName(), PADDING-len(west.GetName())))
+		println(utils.GetStringCenter(west.GetName()+" "+defaultMap[nowX][nowY].GetName()+" "+east.GetName(), PADDING))
+		println(utils.GetStringCenter(south.GetName(), PADDING-len(west.GetName())))
+		println()
+		fmt.Println("가지고 있는 물건 : " + myItemsString)
+		fmt.Println("할 수 있는 행동 : " + ableCommandsString)
 
-		if (nowX-1 >= 0) && defaultMap[nowX-1][nowY].Name != "" {
-			south = defaultMap[nowX-1][nowY]
-			// canMoveSouth = true
-			ableCommands = append(ableCommands, "남")
+		print(">>>  ")
+		fmt.Scanln(&selectedCommand)
 
-		} else {
-			wall := mapObjects.Room{Name: "🚧"}
-			south = wall
-		}
-
-		if (nowX+1 < len(defaultMap) && nowY < len(defaultMap[nowX+1])) && defaultMap[nowX+1][nowY].Name != "" {
-			north = defaultMap[nowX+1][nowY]
-			// canMoverNorth = true
-			ableCommands = append(ableCommands, "북")
-		} else {
-			wall := mapObjects.Room{Name: "🚧"}
-			north = wall
-		}
-
-	var selectedCommand string
-
-	ableCommandsString := strings.Join(ableCommands, ", ")
-	myItemsString := strings.Join(myItems, ", ")
-
-
-	CommandSwitch:utils.ClearConsoleWindows()
-	fmt.Println(systemMessage) //시스템 
-	println(utils.GetStringCenter(north.GetName(), PADDING-len(west.GetName())))
-	println(utils.GetStringCenter(west.GetName()+ " " + defaultMap[nowX][nowY].GetName() + " " + east.GetName(),PADDING))
-	println(utils.GetStringCenter(south.GetName(),PADDING-len(west.GetName())))
-	println()
-	fmt.Println("가지고 있는 물건 : " + myItemsString)
-	fmt.Println("할 수 있는 행동 : " + ableCommandsString )
-
-	print(">>>  ")
-	fmt.Scanln(&selectedCommand)
-
-	if strings.Contains(ableCommandsString, selectedCommand) {
-		switch selectedCommand {
+		if strings.Contains(ableCommandsString, selectedCommand) {
+			switch selectedCommand {
 			//이동 커맨드
-		case "북":
-			defaultMap[nowX][nowY].Name = "🔳"
-			nowX += 1
-			defaultMap[nowX][nowY].Name = "🏃"
-		case "동":
-			defaultMap[nowX][nowY].Name = "🔳"
-			nowY += 1
-			defaultMap[nowX][nowY].Name = "🏃"
-		case "남":
-			defaultMap[nowX][nowY].Name = "🔳"
-			nowX -= 1
-			defaultMap[nowX][nowY].Name = "🏃"
-		case "서":
-			defaultMap[nowX][nowY].Name = "🔳"
-			nowY -= 1
-			defaultMap[nowX][nowY].Name = "🏃"
-			//문 열기
-		
-		default:
-			fmt.Println("디폴트로 들어와버렸음")
+			case "북":
+				defaultMap[nowX][nowY].Name = "🔳"
+				nowX += 1
+				defaultMap[nowX][nowY].Name = "🏃"
+			case "동":
+				defaultMap[nowX][nowY].Name = "🔳"
+				nowY += 1
+				defaultMap[nowX][nowY].Name = "🏃"
+			case "남":
+				defaultMap[nowX][nowY].Name = "🔳"
+				nowX -= 1
+				defaultMap[nowX][nowY].Name = "🏃"
+			case "서":
+				defaultMap[nowX][nowY].Name = "🔳"
+				nowY -= 1
+				defaultMap[nowX][nowY].Name = "🏃"
+			default:
+				fmt.Println("디폴트로 들어와버렸음")
+			}
+		} else {
+			systemMessage = "할 수 없는 행동입니다."
+			goto CommandSwitch
 		}
-	} else {
-		systemMessage = "할 수 없는 행동입니다."
-		goto CommandSwitch
-	}
-	
+
 	}
 
-}
-
-func printWIN() {
-	fmt.Println(`_    _  _____  _   _ 
-| |  | ||_   _|| \ | |
-| |  | |  | |  |  \| |
-| |/\| |  | |  | .   |
-\  /\  / _| |_ | |\  |
-\/  \/  \___/ \_| \_/`)
 }
