@@ -20,7 +20,7 @@ func (r Room) SetName(name string) {
 
 func NewRoom(doorType types.DoorTypes, itemType types.ItemTypes, isGoal bool) Room {
 
-	room := Room{Name: "방"}
+	room := Room{Name: "🔳"}
 
 	switch doorType {
 	case 0:

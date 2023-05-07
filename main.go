@@ -115,19 +115,19 @@ func main() {
 		switch selectedCommand {
 			//이동 커맨드
 		case "북":
-			defaultMap[nowX][nowY].Name = "방"
+			defaultMap[nowX][nowY].Name = "🔳"
 			nowX += 1
 			defaultMap[nowX][nowY].Name = "🏃"
 		case "동":
-			defaultMap[nowX][nowY].Name = "방"
+			defaultMap[nowX][nowY].Name = "🔳"
 			nowY += 1
 			defaultMap[nowX][nowY].Name = "🏃"
 		case "남":
-			defaultMap[nowX][nowY].Name = "방"
+			defaultMap[nowX][nowY].Name = "🔳"
 			nowX -= 1
 			defaultMap[nowX][nowY].Name = "🏃"
 		case "서":
-			defaultMap[nowX][nowY].Name = "방"
+			defaultMap[nowX][nowY].Name = "🔳"
 			nowY -= 1
 			defaultMap[nowX][nowY].Name = "🏃"
 			//문 열기
