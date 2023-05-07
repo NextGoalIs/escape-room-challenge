@@ -21,6 +21,8 @@ func main() {
 
 	for {
 
+		systemMessage := ""
+
 		_,ok := interface{}(defaultMap[nowX][nowY]).(mapObjects.Room)
 		if !ok {
 			fmt.Println("Error")
@@ -34,10 +36,18 @@ func main() {
 			break
 		}
 
-	if thisRoom.ItemType {
-		thisRoom.ItemType = false
-		myItems = append(myItems, "망치")
-	}
+		switch thisRoom.ItemType {
+		case 0:
+		case 1:
+			systemMessage = "열쇠를 획득했다."
+		thisRoom.ItemType = 0
+			myItems = append(myItems, "열쇠")
+		case 2:
+			systemMessage = "망치를 획득했다."
+		thisRoom.ItemType = 0
+			myItems = append(myItems, "망치")
+		default:
+		}
 
 		var north, east, south, west mapObjects.Room
 		// var canMoverNorth, canMoveEast, canMoveSouth, canMoveWest bool
@@ -89,16 +99,16 @@ func main() {
 	myItemsString := strings.Join(myItems, ", ")
 
 
-	utils.ClearConsoleWindows()
-	fmt.Println("") //시스템 
+	CommandSwitch:utils.ClearConsoleWindows()
+	fmt.Println(systemMessage) //시스템 
 	println(utils.GetStringCenter(north.GetName(), PADDING-len(west.GetName())))
 	println(utils.GetStringCenter(west.GetName()+ " " + defaultMap[nowX][nowY].GetName() + " " + east.GetName(),PADDING))
 	println(utils.GetStringCenter(south.GetName(),PADDING-len(west.GetName())))
 	println()
 	fmt.Println("가지고 있는 물건 : " + myItemsString)
-	fmt.Println("할 수 있는 일 : " + ableCommandsString )
+	fmt.Println("할 수 있는 행동 : " + ableCommandsString )
 
-	CommandSwitch: print(">>>  ")
+	print(">>>  ")
 	fmt.Scanln(&selectedCommand)
 
 	if strings.Contains(ableCommandsString, selectedCommand) {
@@ -126,7 +136,7 @@ func main() {
 			fmt.Println("디폴트로 들어와버렸음")
 		}
 	} else {
-		fmt.Println("할 수 없는 행동입니다.")
+		systemMessage = "할 수 없는 행동입니다."
 		goto CommandSwitch
 	}
 	
