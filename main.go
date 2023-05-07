@@ -67,21 +67,21 @@ func main() {
 			switch selectedCommand {
 			//이동 커맨드
 			case "북":
-				defaultMap[nowX][nowY].Name = "🔳"
+				SetRoomNameDefaultRoom(&defaultMap, nowX, nowY)
 				nowX += 1
-				defaultMap[nowX][nowY].Name = "🏃"
+				SetRoomNameMyIcon(&defaultMap, nowX, nowY)
 			case "동":
-				defaultMap[nowX][nowY].Name = "🔳"
+				SetRoomNameDefaultRoom(&defaultMap, nowX, nowY)
 				nowY += 1
-				defaultMap[nowX][nowY].Name = "🏃"
+				SetRoomNameMyIcon(&defaultMap, nowX, nowY)
 			case "남":
-				defaultMap[nowX][nowY].Name = "🔳"
+				SetRoomNameDefaultRoom(&defaultMap, nowX, nowY)
 				nowX -= 1
-				defaultMap[nowX][nowY].Name = "🏃"
+				SetRoomNameMyIcon(&defaultMap, nowX, nowY)
 			case "서":
-				defaultMap[nowX][nowY].Name = "🔳"
+				SetRoomNameDefaultRoom(&defaultMap, nowX, nowY)
 				nowY -= 1
-				defaultMap[nowX][nowY].Name = "🏃"
+				SetRoomNameMyIcon(&defaultMap, nowX, nowY)
 			default:
 				fmt.Println("디폴트로 들어와버렸음")
 			}
@@ -92,4 +92,12 @@ func main() {
 
 	}
 
+}
+
+func SetRoomNameMyIcon(defaultMap *[6][8]mapObjects.Room, nowX int, nowY int) {
+	defaultMap[nowX][nowY].Name = "🏃"
+}
+
+func SetRoomNameDefaultRoom(defaultMap *[6][8]mapObjects.Room, nowX int, nowY int) {
+	defaultMap[nowX][nowY].Name = "🔳"
 }
