@@ -36,18 +36,7 @@ func main() {
 			break
 		}
 
-		switch thisRoom.ItemType {
-		case 0:
-		case 1:
-			systemMessage = "열쇠를 획득했다."
-			thisRoom.ItemType = 0
-			myItems = append(myItems, "열쇠")
-		case 2:
-			systemMessage = "망치를 획득했다."
-			thisRoom.ItemType = 0
-			myItems = append(myItems, "망치")
-		default:
-		}
+		systemMessage, myItems = utils.PickUpCurrentRoomItem(thisRoom, systemMessage, myItems)
 
 		var north, east, south, west mapObjects.Room
 		// var canMoverNorth, canMoveEast, canMoveSouth, canMoveWest bool
