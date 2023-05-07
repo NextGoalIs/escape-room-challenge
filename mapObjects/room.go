@@ -1,9 +1,11 @@
 package mapObjects
 
+import "escape-room-challenge/types"
+
 type Room struct {
 	Name string
 
-	DoorType bool
+	DoorType types.DoorTypes
 	ItemType bool
 	IsGoal   bool
 }
@@ -16,14 +18,29 @@ func (r Room) SetName(name string) {
 	r.Name = name
 }
 
-func NewRoom(doorType bool, itemType bool, isGoal bool) Room {
+func NewRoom(doorType types.DoorTypes, itemType bool, isGoal bool) Room {
 
 	room := Room{Name: "방"}
 
-	if doorType {
+	switch doorType {
+	case 0:
+		
+	case 1:
 		room.Name = "🚪"
 		room.DoorType = doorType
+	case 2:
+		room.Name = "🧊"
+		room.DoorType = doorType
+	case 3 :
+		room.Name = "🔒"
+		room.DoorType = doorType
+	default:
 	}
+
+	// if doorType {
+	// 	room.Name = "🚪"
+	// 	room.DoorType = doorType
+	// }
 
 	if itemType {
 		room.Name = "🔨"

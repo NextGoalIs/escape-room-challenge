@@ -44,16 +44,6 @@ func main() {
 
 		var ableCommands []string
 
-
-		if (nowX+1 < len(defaultMap) && nowY < len(defaultMap[nowX+1])) && defaultMap[nowX+1][nowY].Name != "" {
-			north = defaultMap[nowX+1][nowY]
-			// canMoverNorth = true
-			ableCommands = append(ableCommands, "북")
-		} else {
-			wall := mapObjects.Room{Name: "🚧"}
-			north = wall
-		}
-
 		if (nowY+1 < len(defaultMap[nowX])) && defaultMap[nowX][nowY+1].Name != "" {
 			east = defaultMap[nowX][nowY+1]
 			// canMoveEast = true
@@ -62,16 +52,6 @@ func main() {
 		} else {
 			wall := mapObjects.Room{Name: "🚧"}
 			east = wall
-		}
-		
-		if (nowX-1 >= 0) && defaultMap[nowX-1][nowY].Name != "" {
-			south = defaultMap[nowX-1][nowY]
-			// canMoveSouth = true
-			ableCommands = append(ableCommands, "남")
-
-		} else {
-			wall := mapObjects.Room{Name: "🚧"}
-			south = wall
 		}
 
 		if (nowY-1 >= 0) && defaultMap[nowX][nowY-1].Name != "" {
@@ -84,6 +64,25 @@ func main() {
 			west = wall
 		}
 
+		if (nowX-1 >= 0) && defaultMap[nowX-1][nowY].Name != "" {
+			south = defaultMap[nowX-1][nowY]
+			// canMoveSouth = true
+			ableCommands = append(ableCommands, "남")
+
+		} else {
+			wall := mapObjects.Room{Name: "🚧"}
+			south = wall
+		}
+
+		if (nowX+1 < len(defaultMap) && nowY < len(defaultMap[nowX+1])) && defaultMap[nowX+1][nowY].Name != "" {
+			north = defaultMap[nowX+1][nowY]
+			// canMoverNorth = true
+			ableCommands = append(ableCommands, "북")
+		} else {
+			wall := mapObjects.Room{Name: "🚧"}
+			north = wall
+		}
+
 	var selectedCommand string
 
 	ableCommandsString := strings.Join(ableCommands, ", ")
@@ -91,6 +90,7 @@ func main() {
 
 
 	utils.ClearConsoleWindows()
+	fmt.Println("") //시스템 
 	println(utils.GetStringCenter(north.GetName(), PADDING-len(west.GetName())))
 	println(utils.GetStringCenter(west.GetName()+ " " + defaultMap[nowX][nowY].GetName() + " " + east.GetName(),PADDING))
 	println(utils.GetStringCenter(south.GetName(),PADDING-len(west.GetName())))
