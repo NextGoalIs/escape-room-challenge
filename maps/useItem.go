@@ -1,11 +1,11 @@
 package maps
 
 import (
-	"escape-room-challenge/mapObjects"
+	"escape-room-challenge/rooms"
 	"strings"
 )
 
-func UseItem(selectedCommand string, ableCommandsString string, nowX int, nowY int, myItems *[]string, directionRoom [4]*mapObjects.Room) bool {
+func UseItem(selectedCommand string, ableCommandsString string, nowX int, nowY int, myItems *[]string, directionRoom [4]*rooms.Room) bool {
 	if !strings.Contains(ableCommandsString, selectedCommand) {
 		return false
 	}
@@ -34,7 +34,7 @@ func UseItem(selectedCommand string, ableCommandsString string, nowX int, nowY i
 	return false
 }
 
-func useHammer(item string, room *mapObjects.Room, myItems *[]string) bool {
+func useHammer(item string, room *rooms.Room, myItems *[]string) bool {
 	if item != "망치" {
 		return false
 	}
@@ -43,13 +43,13 @@ func useHammer(item string, room *mapObjects.Room, myItems *[]string) bool {
 		return false
 	}
 
-	setEmptyRoom(room)
+	room.SetEmptyRoom()
 
 	removeItem(myItems, item)
 	return true
 }
 
-func useKey(item string, room *mapObjects.Room, myItems *[]string) bool {
+func useKey(item string, room *rooms.Room, myItems *[]string) bool {
 	if item != "열쇠" {
 		return false
 	}

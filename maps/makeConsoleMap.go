@@ -1,9 +1,9 @@
 package maps
 
-import "escape-room-challenge/mapObjects"
+import "escape-room-challenge/rooms"
 
-func MakeConsoleMap(defaultMap *[6][8]mapObjects.Room, nowX int, nowY int) (*mapObjects.Room, []string, *mapObjects.Room, *mapObjects.Room, *mapObjects.Room) {
-	var north, east, south, west *mapObjects.Room
+func MakeConsoleMap(defaultMap *[6][8]rooms.Room, nowX int, nowY int) (*rooms.Room, []string, *rooms.Room, *rooms.Room, *rooms.Room) {
+	var north, east, south, west *rooms.Room
 	var ableCommands []string
 
 	if (nowY+1 < len(defaultMap[nowX])) && defaultMap[nowX][nowY+1].Name != "" {
@@ -11,7 +11,7 @@ func MakeConsoleMap(defaultMap *[6][8]mapObjects.Room, nowX int, nowY int) (*map
 		ableCommands = append(ableCommands, "동")
 
 	} else {
-		wall := mapObjects.Room{Name: "🚧"}
+		wall := rooms.Room{Name: "🚧"}
 		east = &wall
 	}
 
@@ -20,7 +20,7 @@ func MakeConsoleMap(defaultMap *[6][8]mapObjects.Room, nowX int, nowY int) (*map
 		ableCommands = append(ableCommands, "서")
 
 	} else {
-		wall := mapObjects.Room{Name: "🚧"}
+		wall := rooms.Room{Name: "🚧"}
 		west = &wall
 	}
 
@@ -29,7 +29,7 @@ func MakeConsoleMap(defaultMap *[6][8]mapObjects.Room, nowX int, nowY int) (*map
 		ableCommands = append(ableCommands, "남")
 
 	} else {
-		wall := mapObjects.Room{Name: "🚧"}
+		wall := rooms.Room{Name: "🚧"}
 		south = &wall
 	}
 
@@ -37,7 +37,7 @@ func MakeConsoleMap(defaultMap *[6][8]mapObjects.Room, nowX int, nowY int) (*map
 		north = &defaultMap[nowX+1][nowY]
 		ableCommands = append(ableCommands, "북")
 	} else {
-		wall := mapObjects.Room{Name: "🚧"}
+		wall := rooms.Room{Name: "🚧"}
 		north = &wall
 	}
 	return east, ableCommands, west, south, north

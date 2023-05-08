@@ -1,8 +1,8 @@
 package main
 
 import (
-	"escape-room-challenge/mapObjects"
 	"escape-room-challenge/maps"
+	"escape-room-challenge/rooms"
 	"escape-room-challenge/types"
 	"escape-room-challenge/utils"
 	"fmt"
@@ -26,7 +26,7 @@ func main() {
 
 		thisRoom := &defaultMap[nowX][nowY]
 
-		if thisRoom.IsGoal {
+		if defaultMap[nowX][nowY].IsGoal {
 			utils.PrintWIN()
 			break
 		}
@@ -34,7 +34,7 @@ func main() {
 		systemMessage, myItems = maps.PickUpCurrentRoomItem(thisRoom, systemMessage, myItems)
 
 		east, ableCommands, west, south, north := maps.MakeConsoleMap(&defaultMap, nowX, nowY)
-		directionRoom := [4]*mapObjects.Room{north, west, east, south}
+		directionRoom := [4]*rooms.Room{north, west, east, south}
 
 		var inputItem, inputCommand string
 

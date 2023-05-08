@@ -1,12 +1,12 @@
 package maps
 
 import (
-	"escape-room-challenge/mapObjects"
+	"escape-room-challenge/rooms"
 	"regexp"
 	"strings"
 )
 
-func Move(selectedCommand string, ableCommandsString string, defaultMap *[6][8]mapObjects.Room, nowX *int, nowY *int) bool {
+func Move(selectedCommand string, ableCommandsString string, defaultMap *[6][8]rooms.Room, nowX *int, nowY *int) bool {
 	reg, _ := regexp.Compile("^동.*")
 
 	isEast := reg.MatchString(selectedCommand)
@@ -56,10 +56,10 @@ func Move(selectedCommand string, ableCommandsString string, defaultMap *[6][8]m
 	return false
 }
 
-func setRoomNameMyIcon(defaultMap *[6][8]mapObjects.Room, nowX int, nowY int) {
+func setRoomNameMyIcon(defaultMap *[6][8]rooms.Room, nowX int, nowY int) {
 	defaultMap[nowX][nowY].Name = "🏃"
 }
 
-func setRoomNameDefaultRoom(defaultMap *[6][8]mapObjects.Room, nowX int, nowY int) {
+func setRoomNameDefaultRoom(defaultMap *[6][8]rooms.Room, nowX int, nowY int) {
 	defaultMap[nowX][nowY].Name = "🔳"
 }

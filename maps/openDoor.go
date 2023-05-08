@@ -1,11 +1,11 @@
 package maps
 
 import (
-	"escape-room-challenge/mapObjects"
+	"escape-room-challenge/rooms"
 	"strings"
 )
 
-func OpenDoor(inputItem string, ableCommandsString string, defaultMap *[6][8]mapObjects.Room, nowX int, nowY int, directionRoom [4]*mapObjects.Room, myItems *[]string) bool {
+func OpenDoor(inputItem string, ableCommandsString string, defaultMap *[6][8]rooms.Room, nowX int, nowY int, directionRoom [4]*rooms.Room, myItems *[]string) bool {
 	if !strings.Contains(ableCommandsString, inputItem) {
 		return false
 	}
@@ -17,7 +17,7 @@ func OpenDoor(inputItem string, ableCommandsString string, defaultMap *[6][8]map
 				continue
 			}
 
-			setEmptyRoom(room)
+			room.SetEmptyRoom()
 			break
 		}
 	case "유리문":
@@ -30,7 +30,7 @@ func OpenDoor(inputItem string, ableCommandsString string, defaultMap *[6][8]map
 				continue
 			}
 
-			setEmptyRoom(room)
+			room.SetEmptyRoom()
 			removeItem(myItems, "망치")
 			break
 		}

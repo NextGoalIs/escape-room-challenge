@@ -1,8 +1,8 @@
 package maps
 
-import "escape-room-challenge/mapObjects"
+import "escape-room-challenge/rooms"
 
-func PickUpCurrentRoomItem(thisRoom *mapObjects.Room, systemMessage string, myItems []string) (string, []string) {
+func PickUpCurrentRoomItem(thisRoom *rooms.Room, systemMessage string, myItems []string) (string, []string) {
 	switch thisRoom.ItemType {
 	case 0:
 	case 1:
