@@ -34,19 +34,6 @@ func UseItem(selectedCommand string, ableCommandsString string, nowX int, nowY i
 	return false
 }
 
-func removeItem(myItems *[]string, item string) {
-	if len(*myItems) == 1 && (*myItems)[0] == item {
-		*myItems = []string{}
-	} else {
-		for i, myItem := range *myItems {
-			if myItem == item {
-				*myItems = append((*myItems)[:i], (*myItems)[i+1])
-				break
-			}
-		}
-	}
-}
-
 func useHammer(item string, room *mapObjects.Room, myItems *[]string) bool {
 	if item != "망치" {
 		return false
@@ -56,8 +43,7 @@ func useHammer(item string, room *mapObjects.Room, myItems *[]string) bool {
 		return false
 	}
 
-	room.DoorType = 0
-	room.Name = "🔳"
+	setEmptyRoom(room)
 
 	removeItem(myItems, item)
 	return true
@@ -72,8 +58,7 @@ func useKey(item string, room *mapObjects.Room, myItems *[]string) bool {
 		return false
 	}
 
-	room.DoorType = 0
-	room.Name = "🔳"
+	setWoodDoor(room)
 
 	removeItem(myItems, item)
 	return true

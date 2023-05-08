@@ -80,6 +80,15 @@ func main() {
 			}
 		}
 
+		if inputCommand != "" && inputCommand == "열기" {
+			hasActed = maps.OpenDoor(inputItem, ableCommandsString, &defaultMap, nowX, nowY, directionRoom, &myItems)
+
+			if hasActed {
+				systemMessage = "문을 열었습니다."
+				goto CommandSwitch
+			}
+		}
+
 		hasActed = maps.Move(inputItem, ableCommandsString, &defaultMap, &nowX, &nowY)
 
 		if !hasActed {
