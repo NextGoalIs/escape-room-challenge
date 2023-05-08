@@ -44,7 +44,7 @@ func OpenDoor(inputItem string, ableCommandsString string, defaultMap *[6][8]roo
 				continue
 			}
 
-			setWoodDoor(room)
+			room.SetWoodDoor()
 			break
 		}
 	default:

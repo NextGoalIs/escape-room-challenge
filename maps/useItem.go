@@ -58,7 +58,7 @@ func useKey(item string, room *rooms.Room, myItems *[]string) bool {
 		return false
 	}
 
-	setWoodDoor(room)
+	room.SetWoodDoor()
 
 	removeItem(myItems, item)
 	return true
