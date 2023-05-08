@@ -6,7 +6,12 @@ import (
 	"fmt"
 )
 
-func PrintDisplay(systemMessage string, north *mapObjects.Room, PADDING int, west *mapObjects.Room, defaultMap [6][8]mapObjects.Room, nowX int, nowY int, east *mapObjects.Room, south *mapObjects.Room, myItemsString string, ableCommandsString string) {
+func PrintDisplay(systemMessage string, PADDING int, defaultMap [6][8]mapObjects.Room, nowX int, nowY int, myItemsString string, ableCommandsString string, directionRoom [4]*mapObjects.Room) {
+	north := directionRoom[0]
+	west := directionRoom[1]
+	east := directionRoom[2]
+	south := directionRoom[3]
+
 	utils.ClearConsoleWindows()
 	fmt.Println(systemMessage)
 	println(utils.GetStringCenter(north.GetName(), PADDING-len(west.GetName())))
@@ -14,7 +19,7 @@ func PrintDisplay(systemMessage string, north *mapObjects.Room, PADDING int, wes
 	println(utils.GetStringCenter(south.GetName(), PADDING-len(west.GetName())))
 	println()
 	fmt.Println("가지고 있는 물건 : " + myItemsString)
-	fmt.Println("할 수 있는 행동 : " + ableCommandsString)
+	fmt.Println("행동 : " + ableCommandsString)
 
 	print(">>>  ")
 }

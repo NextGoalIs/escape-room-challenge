@@ -5,12 +5,10 @@ import (
 	"strings"
 )
 
-func UseItem(selectedCommand string, ableCommandsString string, nowX int, nowY int, myItems *[]string, east *mapObjects.Room, west *mapObjects.Room, south *mapObjects.Room, north *mapObjects.Room) bool {
+func UseItem(selectedCommand string, ableCommandsString string, nowX int, nowY int, myItems *[]string, directionRoom [4]*mapObjects.Room) bool {
 	if !strings.Contains(ableCommandsString, selectedCommand) {
 		return false
 	}
-
-	directionRoom := [4]*mapObjects.Room{east, west, south, north}
 
 	for _, item := range *myItems {
 		if !strings.Contains(selectedCommand, item) {
