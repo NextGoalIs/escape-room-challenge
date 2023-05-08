@@ -1,7 +1,6 @@
 package main
 
 import (
-	"escape-room-challenge/mapObjects"
 	"escape-room-challenge/maps"
 	"escape-room-challenge/utils"
 	"fmt"
@@ -23,12 +22,6 @@ func main() {
 
 		systemMessage := ""
 
-		_, ok := interface{}(defaultMap[nowX][nowY]).(mapObjects.Room)
-		if !ok {
-			fmt.Println("Error")
-			break
-		}
-
 		thisRoom := &defaultMap[nowX][nowY]
 
 		if thisRoom.IsGoal {
@@ -49,7 +42,6 @@ func main() {
 		ableCommandsString := strings.Join(ableCommands, ", ")
 		myItemsString := strings.Join(myItems, ", ")
 
-		//시스템
 		maps.PrintDisplay(systemMessage, north, PADDING, west, defaultMap, nowX, nowY, east, south, myItemsString, ableCommandsString)
 		fmt.Scanln(&inputItem, &inputCommand)
 
@@ -70,7 +62,6 @@ func main() {
 			systemMessage = "할 수 없는 행동입니다."
 			goto CommandSwitch
 		}
-
 	}
 
 }
