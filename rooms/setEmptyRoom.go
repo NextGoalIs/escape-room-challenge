@@ -1,6 +1,8 @@
 package rooms
 
+import "escape-room-challenge/types"
+
 func (r *Room) SetEmptyRoom() {
-	r.DoorType = 0
+	r.DoorType = types.NoDoor
 	r.Name = "🔳"
 }

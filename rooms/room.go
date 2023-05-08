@@ -15,25 +15,25 @@ func NewRoom(doorType types.DoorTypes, itemType types.ItemTypes, isGoal bool) Ro
 	room := Room{Name: "🔳"}
 
 	switch doorType {
-	case 0:
-	case 1:
+	case types.NoDoor:
+	case types.Wood:
 		room.Name = "🚪"
 		room.DoorType = doorType
-	case 2:
+	case types.Glass:
 		room.Name = "🧊"
 		room.DoorType = doorType
-	case 3:
+	case types.Locked:
 		room.Name = "🔒"
 		room.DoorType = doorType
 	default:
 	}
 
 	switch itemType {
-	case 0:
-	case 1:
+	case types.NoItem:
+	case types.Key:
 		room.Name = "🔑"
 		room.ItemType = itemType
-	case 2:
+	case types.Hammer:
 		room.Name = "🔨"
 		room.ItemType = itemType
 	default:

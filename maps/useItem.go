@@ -2,6 +2,7 @@ package maps
 
 import (
 	"escape-room-challenge/rooms"
+	"escape-room-challenge/types"
 	"strings"
 )
 
@@ -39,7 +40,7 @@ func useHammer(item string, room *rooms.Room, myItems *[]string) bool {
 		return false
 	}
 
-	if room.DoorType != 2 {
+	if room.DoorType != types.Glass {
 		return false
 	}
 
@@ -54,7 +55,7 @@ func useKey(item string, room *rooms.Room, myItems *[]string) bool {
 		return false
 	}
 
-	if room.DoorType != 3 {
+	if room.DoorType != types.Locked {
 		return false
 	}
 

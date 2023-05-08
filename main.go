@@ -43,7 +43,7 @@ func main() {
 		}
 
 		for _, v := range directionRoom {
-			if v.DoorType == 0 {
+			if v.DoorType == types.NoDoor {
 				continue
 			}
 

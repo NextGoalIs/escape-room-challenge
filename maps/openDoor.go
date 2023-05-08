@@ -2,6 +2,7 @@ package maps
 
 import (
 	"escape-room-challenge/rooms"
+	"escape-room-challenge/types"
 	"strings"
 )
 
@@ -13,7 +14,7 @@ func OpenDoor(inputItem string, ableCommandsString string, defaultMap *[6][8]roo
 	switch inputItem {
 	case "나무문":
 		for _, room := range directionRoom {
-			if room.DoorType != 1 {
+			if room.DoorType != types.Wood {
 				continue
 			}
 
@@ -26,7 +27,7 @@ func OpenDoor(inputItem string, ableCommandsString string, defaultMap *[6][8]roo
 		}
 
 		for _, room := range directionRoom {
-			if room.DoorType != 2 {
+			if room.DoorType != types.Glass {
 				continue
 			}
 
@@ -40,7 +41,7 @@ func OpenDoor(inputItem string, ableCommandsString string, defaultMap *[6][8]roo
 		}
 
 		for _, room := range directionRoom {
-			if room.DoorType != 3 {
+			if room.DoorType != types.Locked {
 				continue
 			}
 
