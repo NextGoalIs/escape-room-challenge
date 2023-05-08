@@ -31,7 +31,7 @@ func main() {
 			break
 		}
 	CommandSwitch:
-		systemMessage, myItems = maps.PickUpCurrentRoomItem(thisRoom, systemMessage, myItems)
+		systemMessage, myItems = thisRoom.PickUpCurrentRoomItem(systemMessage, myItems)
 
 		east, ableCommands, west, south, north := maps.MakeConsoleMap(&defaultMap, nowX, nowY)
 		directionRoom := [4]*rooms.Room{north, west, east, south}

@@ -1,17 +1,15 @@
-package maps
+package rooms
 
-import "escape-room-challenge/rooms"
-
-func PickUpCurrentRoomItem(thisRoom *rooms.Room, systemMessage string, myItems []string) (string, []string) {
-	switch thisRoom.ItemType {
+func (room *Room) PickUpCurrentRoomItem(systemMessage string, myItems []string) (string, []string) {
+	switch room.ItemType {
 	case 0:
 	case 1:
 		systemMessage = "열쇠를 획득했다."
-		thisRoom.ItemType = 0
+		room.ItemType = 0
 		myItems = append(myItems, "열쇠")
 	case 2:
 		systemMessage = "망치를 획득했다."
-		thisRoom.ItemType = 0
+		room.ItemType = 0
 		myItems = append(myItems, "망치")
 	default:
 	}
