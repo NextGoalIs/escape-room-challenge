@@ -40,7 +40,7 @@ func useHammer(item string, room *rooms.Room, myItems *[]string) bool {
 		return false
 	}
 
-	if room.DoorType != types.Glass {
+	if room.DoorType != types.GlassType {
 		return false
 	}
 
@@ -55,7 +55,7 @@ func useKey(item string, room *rooms.Room, myItems *[]string) bool {
 		return false
 	}
 
-	if room.DoorType != types.Locked {
+	if room.DoorType != types.LockedType {
 		return false
 	}
 

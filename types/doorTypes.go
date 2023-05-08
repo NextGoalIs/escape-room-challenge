@@ -4,16 +4,17 @@ type DoorTypes int
 type DoorNames string
 
 const (
-	NoDoor DoorTypes = iota
-	Wood
-	Glass
-	Locked
+	NoDoorType DoorTypes = iota
+	WoodType
+	GlassType
+	LockedType
 )
 
 const (
-	NoDoorName DoorNames = "🔳"
-	WoodName   DoorNames = "🚪"
-	GlassName  DoorNames = "🧊"
-	LockedName DoorNames = "🔒"
-	WallName   DoorNames = "🚧"
+	NoDoorName      DoorNames = "🔳"
+	WoodName        DoorNames = "🚪"
+	GlassName       DoorNames = "🧊"
+	LockedName      DoorNames = "🔒"
+	WallName        DoorNames = "🚧"
+	MyCharacterName DoorNames = "🏃"
 )

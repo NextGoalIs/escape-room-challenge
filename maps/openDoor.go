@@ -14,7 +14,7 @@ func OpenDoor(inputItem string, ableCommandsString string, defaultMap *[6][8]roo
 	switch inputItem {
 	case "나무문":
 		for _, room := range directionRoom {
-			if room.DoorType != types.Wood {
+			if room.DoorType != types.WoodType {
 				continue
 			}
 
@@ -27,7 +27,7 @@ func OpenDoor(inputItem string, ableCommandsString string, defaultMap *[6][8]roo
 		}
 
 		for _, room := range directionRoom {
-			if room.DoorType != types.Glass {
+			if room.DoorType != types.GlassType {
 				continue
 			}
 
@@ -41,7 +41,7 @@ func OpenDoor(inputItem string, ableCommandsString string, defaultMap *[6][8]roo
 		}
 
 		for _, room := range directionRoom {
-			if room.DoorType != types.Locked {
+			if room.DoorType != types.LockedType {
 				continue
 			}
 

@@ -43,21 +43,21 @@ func main() {
 		}
 
 		for _, v := range directionRoom {
-			if v.DoorType == types.NoDoor {
+			if v.DoorType == types.NoDoorType {
 				continue
 			}
 
-			if v.DoorType == types.Wood {
+			if v.DoorType == types.WoodType {
 				ableCommands = append(ableCommands, "나무문 열기")
 				continue
 			}
 
-			if v.DoorType == types.Glass {
+			if v.DoorType == types.GlassType {
 				ableCommands = append(ableCommands, "유리문 열기")
 				continue
 			}
 
-			if v.DoorType == types.Locked {
+			if v.DoorType == types.LockedType {
 				ableCommands = append(ableCommands, "잠긴문 열기")
 				continue
 			}
