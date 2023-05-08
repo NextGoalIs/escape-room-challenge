@@ -12,9 +12,9 @@ func Move(selectedCommand string, ableCommandsString string, defaultMap *[6][8]r
 	isEast := reg.MatchString(selectedCommand)
 
 	if isEast && strings.Contains(ableCommandsString, "동") && defaultMap[*nowX][*nowY+1].DoorType == 0 {
-		setRoomNameDefaultRoom(defaultMap, *nowX, *nowY)
+		defaultMap[*nowX][*nowY].SetEmptyRoom()
 		*nowY += 1
-		setRoomNameMyIcon(defaultMap, *nowX, *nowY)
+		defaultMap[*nowX][*nowY].SetMyCharacterRoom()
 		return true
 	}
 
@@ -23,9 +23,9 @@ func Move(selectedCommand string, ableCommandsString string, defaultMap *[6][8]r
 	isWest := reg.MatchString(selectedCommand)
 
 	if isWest && strings.Contains(ableCommandsString, "서") && defaultMap[*nowX][*nowY-1].DoorType == 0 {
-		setRoomNameDefaultRoom(defaultMap, *nowX, *nowY)
+		defaultMap[*nowX][*nowY].SetEmptyRoom()
 		*nowY -= 1
-		setRoomNameMyIcon(defaultMap, *nowX, *nowY)
+		defaultMap[*nowX][*nowY].SetMyCharacterRoom()
 		return true
 
 	}
@@ -35,9 +35,9 @@ func Move(selectedCommand string, ableCommandsString string, defaultMap *[6][8]r
 	isSouth := reg.MatchString(selectedCommand)
 
 	if isSouth && strings.Contains(ableCommandsString, "남") && defaultMap[*nowX-1][*nowY].DoorType == 0 {
-		setRoomNameDefaultRoom(defaultMap, *nowX, *nowY)
+		defaultMap[*nowX][*nowY].SetEmptyRoom()
 		*nowX -= 1
-		setRoomNameMyIcon(defaultMap, *nowX, *nowY)
+		defaultMap[*nowX][*nowY].SetMyCharacterRoom()
 		return true
 
 	}
@@ -47,19 +47,11 @@ func Move(selectedCommand string, ableCommandsString string, defaultMap *[6][8]r
 	isNorth := reg.MatchString(selectedCommand)
 
 	if isNorth && strings.Contains(ableCommandsString, "북") && defaultMap[*nowX+1][*nowY].DoorType == 0 {
-		setRoomNameDefaultRoom(defaultMap, *nowX, *nowY)
+		defaultMap[*nowX][*nowY].SetEmptyRoom()
 		*nowX += 1
-		setRoomNameMyIcon(defaultMap, *nowX, *nowY)
+		defaultMap[*nowX][*nowY].SetMyCharacterRoom()
 		return true
 	}
 
 	return false
-}
-
-func setRoomNameMyIcon(defaultMap *[6][8]rooms.Room, nowX int, nowY int) {
-	defaultMap[nowX][nowY].Name = "🏃"
-}
-
-func setRoomNameDefaultRoom(defaultMap *[6][8]rooms.Room, nowX int, nowY int) {
-	defaultMap[nowX][nowY].Name = "🔳"
 }
