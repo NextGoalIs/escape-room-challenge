@@ -5,7 +5,6 @@ import (
 	"escape-room-challenge/maps"
 	"escape-room-challenge/utils"
 	"fmt"
-	"regexp"
 	"strings"
 )
 
@@ -16,7 +15,7 @@ func main() {
 	nowY := 1
 	var myItems []string
 
-	PADDING := 80
+	PADDING := 60
 
 	defaultMap[nowX][nowY].Name = "🏃"
 
@@ -36,17 +35,12 @@ func main() {
 			utils.PrintWIN()
 			break
 		}
+	CommandSwitch:
+		systemMessage, myItems = maps.PickUpCurrentRoomItem(thisRoom, systemMessage, myItems)
 
-		systemMessage, myItems = utils.PickUpCurrentRoomItem(thisRoom, systemMessage, myItems)
+		east, ableCommands, west, south, north := maps.MakeConsoleMap(&defaultMap, nowX, nowY)
 
-		var north, east, south, west mapObjects.Room
-		// var canMoverNorth, canMoveEast, canMoveSouth, canMoveWest bool
-
-		var ableCommands []string
-
-		east, ableCommands, west, south, north = utils.MakeConsoleMap(defaultMap, nowX, nowY, east, ableCommands, west, south, north)
-
-		var selectedCommand string
+		var inputItem, inputCommand string
 
 		for _, v := range myItems {
 			ableCommands = append(ableCommands, v+" 사용")
@@ -55,111 +49,28 @@ func main() {
 		ableCommandsString := strings.Join(ableCommands, ", ")
 		myItemsString := strings.Join(myItems, ", ")
 
-	CommandSwitch:
-		utils.ClearConsoleWindows()
-		fmt.Println(systemMessage) //시스템
-		println(utils.GetStringCenter(north.GetName(), PADDING-len(west.GetName())))
-		println(utils.GetStringCenter(west.GetName()+" "+defaultMap[nowX][nowY].GetName()+" "+east.GetName(), PADDING))
-		println(utils.GetStringCenter(south.GetName(), PADDING-len(west.GetName())))
-		println()
-		fmt.Println("가지고 있는 물건 : " + myItemsString)
-		fmt.Println("할 수 있는 행동 : " + ableCommandsString)
+		//시스템
+		maps.PrintDisplay(systemMessage, north, PADDING, west, defaultMap, nowX, nowY, east, south, myItemsString, ableCommandsString)
+		fmt.Scanln(&inputItem, &inputCommand)
 
-		print(">>>  ")
-		fmt.Scan(&selectedCommand)
+		var hasActed bool
 
-		hasActed := Move(selectedCommand, ableCommandsString, &defaultMap, &nowX, &nowY)
+		if inputCommand != "" && inputCommand == "사용" {
+			hasActed = maps.UseItem(inputItem, ableCommandsString, nowX, nowY, &myItems, east, west, south, north)
+
+			if hasActed {
+				systemMessage = "아이템을 사용했습니다."
+				goto CommandSwitch
+			}
+		}
+
+		hasActed = maps.Move(inputItem, ableCommandsString, &defaultMap, &nowX, &nowY)
 
 		if !hasActed {
 			systemMessage = "할 수 없는 행동입니다."
 			goto CommandSwitch
 		}
 
-		// if strings.Contains(ableCommandsString, selectedCommand) {
-		// 	switch selectedCommand {
-		// 	//이동 커맨드
-		// 	case "북":
-		// 		SetRoomNameDefaultRoom(&defaultMap, nowX, nowY)
-		// 		nowX += 1
-		// 		SetRoomNameMyIcon(&defaultMap, nowX, nowY)
-		// 	case "동":
-		// 		SetRoomNameDefaultRoom(&defaultMap, nowX, nowY)
-		// 		nowY += 1
-		// 		SetRoomNameMyIcon(&defaultMap, nowX, nowY)
-		// 	case "남":
-		// 		SetRoomNameDefaultRoom(&defaultMap, nowX, nowY)
-		// 		nowX -= 1
-		// 		SetRoomNameMyIcon(&defaultMap, nowX, nowY)
-		// 	case "서":
-		// 		SetRoomNameDefaultRoom(&defaultMap, nowX, nowY)
-		// 		nowY -= 1
-		// 		SetRoomNameMyIcon(&defaultMap, nowX, nowY)
-		// 	default:
-		// 		fmt.Println("디폴트로 들어와버렸음")
-		// 	}
-		// } else {
-		// 	systemMessage = "할 수 없는 행동입니다."
-		// 	goto CommandSwitch
-		// }
-
 	}
 
-}
-
-func Move(selectedCommand string, ableCommandsString string, defaultMap *[6][8]mapObjects.Room, nowX *int, nowY *int) bool {
-	reg, _ := regexp.Compile("^동.*")
-
-	isEast := reg.MatchString(selectedCommand)
-
-	if isEast && strings.Contains(ableCommandsString, "동") {
-		SetRoomNameDefaultRoom(defaultMap, *nowX, *nowY)
-		*nowY += 1
-		SetRoomNameMyIcon(defaultMap, *nowX, *nowY)
-		return true
-	}
-
-	reg, _ = regexp.Compile("^서.*")
-
-	isWest := reg.MatchString(selectedCommand)
-
-	if isWest && strings.Contains(ableCommandsString, "서") {
-		SetRoomNameDefaultRoom(defaultMap, *nowX, *nowY)
-		*nowY -= 1
-		SetRoomNameMyIcon(defaultMap, *nowX, *nowY)
-		return true
-
-	}
-
-	reg, _ = regexp.Compile("^남.*")
-
-	isSouth := reg.MatchString(selectedCommand)
-
-	if isSouth && strings.Contains(ableCommandsString, "남") {
-		SetRoomNameDefaultRoom(defaultMap, *nowX, *nowY)
-		*nowX -= 1
-		SetRoomNameMyIcon(defaultMap, *nowX, *nowY)
-		return true
-
-	}
-
-	reg, _ = regexp.Compile("^북.*")
-
-	isNorth := reg.MatchString(selectedCommand)
-
-	if isNorth && strings.Contains(ableCommandsString, "북") {
-		SetRoomNameDefaultRoom(defaultMap, *nowX, *nowY)
-		*nowX += 1
-		SetRoomNameMyIcon(defaultMap, *nowX, *nowY)
-		return true
-	}
-
-	return false
-}
-
-func SetRoomNameMyIcon(defaultMap *[6][8]mapObjects.Room, nowX int, nowY int) {
-	defaultMap[nowX][nowY].Name = "🏃"
-}
-
-func SetRoomNameDefaultRoom(defaultMap *[6][8]mapObjects.Room, nowX int, nowY int) {
-	defaultMap[nowX][nowY].Name = "🔳"
 }
