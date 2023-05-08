@@ -11,8 +11,7 @@ func MakeConsoleMap(defaultMap *[6][8]rooms.Room, nowX int, nowY int) (*rooms.Ro
 		ableCommands = append(ableCommands, "동")
 
 	} else {
-		wall := rooms.Room{Name: "🚧"}
-		east = &wall
+		east = rooms.GetWall()
 	}
 
 	if (nowY-1 >= 0) && defaultMap[nowX][nowY-1].Name != "" {
@@ -20,8 +19,7 @@ func MakeConsoleMap(defaultMap *[6][8]rooms.Room, nowX int, nowY int) (*rooms.Ro
 		ableCommands = append(ableCommands, "서")
 
 	} else {
-		wall := rooms.Room{Name: "🚧"}
-		west = &wall
+		west = rooms.GetWall()
 	}
 
 	if (nowX-1 >= 0) && defaultMap[nowX-1][nowY].Name != "" {
@@ -29,16 +27,14 @@ func MakeConsoleMap(defaultMap *[6][8]rooms.Room, nowX int, nowY int) (*rooms.Ro
 		ableCommands = append(ableCommands, "남")
 
 	} else {
-		wall := rooms.Room{Name: "🚧"}
-		south = &wall
+		south = rooms.GetWall()
 	}
 
 	if (nowX+1 < len(defaultMap) && nowY < len(defaultMap[nowX+1])) && defaultMap[nowX+1][nowY].Name != "" {
 		north = &defaultMap[nowX+1][nowY]
 		ableCommands = append(ableCommands, "북")
 	} else {
-		wall := rooms.Room{Name: "🚧"}
-		north = &wall
+		north = rooms.GetWall()
 	}
 	return east, ableCommands, west, south, north
 }
