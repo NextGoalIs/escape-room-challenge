@@ -34,7 +34,7 @@ func main() {
 		systemMessage, myItems = thisRoom.PickUpCurrentRoomItem(systemMessage, myItems)
 
 		east, ableCommands, west, south, north := maps.MakeConsoleMap(&defaultMap, nowX, nowY)
-		directionRoom := [4]*rooms.Room{north, west, east, south}
+		connectingRooms := [4]*rooms.Room{north, west, east, south}
 
 		var inputItem, inputCommand string
 
@@ -42,7 +42,7 @@ func main() {
 			ableCommands = append(ableCommands, v+" 사용")
 		}
 
-		for _, v := range directionRoom {
+		for _, v := range connectingRooms {
 			if v.DoorType == types.NoDoorType {
 				continue
 			}
@@ -66,13 +66,13 @@ func main() {
 		ableCommandsString := strings.Join(ableCommands, ", ")
 		myItemsString := strings.Join(myItems, ", ")
 
-		maps.PrintDisplay(systemMessage, PADDING, defaultMap, nowX, nowY, myItemsString, ableCommandsString, directionRoom)
+		maps.PrintDisplay(systemMessage, PADDING, defaultMap, nowX, nowY, myItemsString, ableCommandsString, connectingRooms)
 		fmt.Scanln(&inputItem, &inputCommand)
 
 		var hasActed bool
 
 		if inputCommand != "" && inputCommand == "사용" {
-			hasActed = maps.UseItem(inputItem, ableCommandsString, nowX, nowY, &myItems, directionRoom)
+			hasActed = maps.UseItem(inputItem, ableCommandsString, nowX, nowY, &myItems, connectingRooms)
 
 			if hasActed {
 				systemMessage = "아이템을 사용했습니다."
@@ -81,7 +81,7 @@ func main() {
 		}
 
 		if inputCommand != "" && inputCommand == "열기" {
-			hasActed = maps.OpenDoor(inputItem, ableCommandsString, &defaultMap, nowX, nowY, directionRoom, &myItems)
+			hasActed = maps.OpenDoor(inputItem, ableCommandsString, &defaultMap, nowX, nowY, connectingRooms, &myItems)
 
 			if hasActed {
 				systemMessage = "문을 열었습니다."

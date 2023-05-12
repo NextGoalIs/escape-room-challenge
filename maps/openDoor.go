@@ -6,14 +6,14 @@ import (
 	"strings"
 )
 
-func OpenDoor(inputItem string, ableCommandsString string, defaultMap *[6][8]rooms.Room, nowX int, nowY int, directionRoom [4]*rooms.Room, myItems *[]string) bool {
+func OpenDoor(inputItem string, ableCommandsString string, defaultMap *[6][8]rooms.Room, nowX int, nowY int, connectingRooms [4]*rooms.Room, myItems *[]string) bool {
 	if !strings.Contains(ableCommandsString, inputItem) {
 		return false
 	}
 
 	switch inputItem {
 	case "나무문":
-		for _, room := range directionRoom {
+		for _, room := range connectingRooms {
 			if room.DoorType != types.WoodType {
 				continue
 			}
@@ -26,7 +26,7 @@ func OpenDoor(inputItem string, ableCommandsString string, defaultMap *[6][8]roo
 			return false
 		}
 
-		for _, room := range directionRoom {
+		for _, room := range connectingRooms {
 			if room.DoorType != types.GlassType {
 				continue
 			}
@@ -40,7 +40,7 @@ func OpenDoor(inputItem string, ableCommandsString string, defaultMap *[6][8]roo
 			return false
 		}
 
-		for _, room := range directionRoom {
+		for _, room := range connectingRooms {
 			if room.DoorType != types.LockedType {
 				continue
 			}

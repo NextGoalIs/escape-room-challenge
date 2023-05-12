@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func UseItem(selectedCommand string, ableCommandsString string, nowX int, nowY int, myItems *[]string, directionRoom [4]*rooms.Room) bool {
+func UseItem(selectedCommand string, ableCommandsString string, nowX int, nowY int, myItems *[]string, connectingRooms [4]*rooms.Room) bool {
 	if !strings.Contains(ableCommandsString, selectedCommand) {
 		return false
 	}
@@ -16,14 +16,14 @@ func UseItem(selectedCommand string, ableCommandsString string, nowX int, nowY i
 			continue
 		}
 
-		for _, room := range directionRoom {
+		for _, room := range connectingRooms {
 			isUsed := useHammer(item, room, myItems)
 			if isUsed {
 				return true
 			}
 		}
 
-		for _, room := range directionRoom {
+		for _, room := range connectingRooms {
 			isUsed := useKey(item, room, myItems)
 			if isUsed {
 				return true

@@ -6,11 +6,11 @@ import (
 	"fmt"
 )
 
-func PrintDisplay(systemMessage string, PADDING int, defaultMap [6][8]rooms.Room, nowX int, nowY int, myItemsString string, ableCommandsString string, directionRoom [4]*rooms.Room) {
-	north := directionRoom[0]
-	west := directionRoom[1]
-	east := directionRoom[2]
-	south := directionRoom[3]
+func PrintDisplay(systemMessage string, PADDING int, defaultMap [6][8]rooms.Room, nowX int, nowY int, myItemsString string, ableCommandsString string, connectingRooms [4]*rooms.Room) {
+	north := connectingRooms[0]
+	west := connectingRooms[1]
+	east := connectingRooms[2]
+	south := connectingRooms[3]
 
 	utils.ClearConsoleWindows()
 	fmt.Println(systemMessage)
