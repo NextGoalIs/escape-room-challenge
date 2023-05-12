@@ -6,7 +6,7 @@ func MakeConsoleMap(defaultMap *[6][8]rooms.Room, nowX int, nowY int) (*rooms.Ro
 	var north, east, south, west *rooms.Room
 	var ableCommands []string
 
-	if (nowY+1 < len(defaultMap[nowX])) && defaultMap[nowX][nowY+1].Name != "" {
+	if (nowY+1 < len(defaultMap[nowX])) && defaultMap[nowX][nowY+1].Icon != "" {
 		east = &defaultMap[nowX][nowY+1]
 		ableCommands = append(ableCommands, "동")
 
@@ -14,7 +14,7 @@ func MakeConsoleMap(defaultMap *[6][8]rooms.Room, nowX int, nowY int) (*rooms.Ro
 		east = rooms.GetWall()
 	}
 
-	if (nowY-1 >= 0) && defaultMap[nowX][nowY-1].Name != "" {
+	if (nowY-1 >= 0) && defaultMap[nowX][nowY-1].Icon != "" {
 		west = &defaultMap[nowX][nowY-1]
 		ableCommands = append(ableCommands, "서")
 
@@ -22,7 +22,7 @@ func MakeConsoleMap(defaultMap *[6][8]rooms.Room, nowX int, nowY int) (*rooms.Ro
 		west = rooms.GetWall()
 	}
 
-	if (nowX-1 >= 0) && defaultMap[nowX-1][nowY].Name != "" {
+	if (nowX-1 >= 0) && defaultMap[nowX-1][nowY].Icon != "" {
 		south = &defaultMap[nowX-1][nowY]
 		ableCommands = append(ableCommands, "남")
 
@@ -30,7 +30,7 @@ func MakeConsoleMap(defaultMap *[6][8]rooms.Room, nowX int, nowY int) (*rooms.Ro
 		south = rooms.GetWall()
 	}
 
-	if (nowX+1 < len(defaultMap) && nowY < len(defaultMap[nowX+1])) && defaultMap[nowX+1][nowY].Name != "" {
+	if (nowX+1 < len(defaultMap) && nowY < len(defaultMap[nowX+1])) && defaultMap[nowX+1][nowY].Icon != "" {
 		north = &defaultMap[nowX+1][nowY]
 		ableCommands = append(ableCommands, "북")
 	} else {

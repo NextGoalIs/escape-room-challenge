@@ -18,7 +18,7 @@ func main() {
 
 	PADDING := 60
 
-	defaultMap[nowX][nowY].Name = "🏃"
+	defaultMap[nowX][nowY].Icon = "🏃"
 
 	for {
 

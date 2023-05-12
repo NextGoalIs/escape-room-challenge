@@ -3,7 +3,7 @@ package rooms
 import "escape-room-challenge/types"
 
 type Room struct {
-	Name string
+	Icon string
 
 	DoorType types.DoorTypes
 	ItemType types.ItemTypes
@@ -12,18 +12,18 @@ type Room struct {
 
 func NewRoom(doorType types.DoorTypes, itemType types.ItemTypes, isGoal bool) Room {
 
-	room := Room{Name: "🔳"}
+	room := Room{Icon: "🔳"}
 
 	switch doorType {
 	case types.NoDoorType:
 	case types.WoodType:
-		room.Name = string(types.WoodName)
+		room.Icon = string(types.WoodIcon)
 		room.DoorType = doorType
 	case types.GlassType:
-		room.Name = string(types.GlassName)
+		room.Icon = string(types.GlassIcon)
 		room.DoorType = doorType
 	case types.LockedType:
-		room.Name = string(types.LockedName)
+		room.Icon = string(types.LockedIcon)
 		room.DoorType = doorType
 	default:
 	}
@@ -31,10 +31,10 @@ func NewRoom(doorType types.DoorTypes, itemType types.ItemTypes, isGoal bool) Ro
 	switch itemType {
 	case types.NoItem:
 	case types.Key:
-		room.Name = string(types.KeyName)
+		room.Icon = string(types.KeyIcon)
 		room.ItemType = itemType
 	case types.Hammer:
-		room.Name = string(types.HammerName)
+		room.Icon = string(types.HammerIcon)
 		room.ItemType = itemType
 	default:
 	}

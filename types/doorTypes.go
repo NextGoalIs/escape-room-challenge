@@ -1,7 +1,7 @@
 package types
 
 type DoorTypes int
-type DoorNames string
+type DoorIcons string
 
 const (
 	NoDoorType DoorTypes = iota
@@ -11,10 +11,10 @@ const (
 )
 
 const (
-	NoDoorName      DoorNames = "🔳"
-	WoodName        DoorNames = "🚪"
-	GlassName       DoorNames = "🧊"
-	LockedName      DoorNames = "🔒"
-	WallName        DoorNames = "🚧"
-	MyCharacterName DoorNames = "🏃"
+	NoDoorIcon      DoorIcons = "🔳"
+	WoodIcon        DoorIcons = "🚪"
+	GlassIcon       DoorIcons = "🧊"
+	LockedIcon      DoorIcons = "🔒"
+	WallIcon        DoorIcons = "🚧"
+	MyCharacterIcon DoorIcons = "🏃"
 )

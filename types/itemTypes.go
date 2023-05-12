@@ -1,7 +1,7 @@
 package types
 
 type ItemTypes int
-type ItemNames string
+type ItemIcons string
 
 const (
 	NoItem ItemTypes = iota
@@ -10,7 +10,7 @@ const (
 )
 
 const (
-	NoItemName ItemNames = ""
-	KeyName    ItemNames = "🔑"
-	HammerName ItemNames = "🔨"
+	NoItemIcon ItemIcons = ""
+	KeyIcon    ItemIcons = "🔑"
+	HammerIcon ItemIcons = "🔨"
 )

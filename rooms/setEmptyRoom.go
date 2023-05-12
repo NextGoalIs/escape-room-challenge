@@ -4,5 +4,5 @@ import "escape-room-challenge/types"
 
 func (r *Room) SetEmptyRoom() {
 	r.DoorType = types.NoDoorType
-	r.Name = string(types.NoDoorName)
+	r.Icon = string(types.NoDoorIcon)
 }
