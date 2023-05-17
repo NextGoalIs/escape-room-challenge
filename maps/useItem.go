@@ -44,7 +44,7 @@ func useHammer(item string, room *rooms.Room, myItems *[]string) bool {
 		return false
 	}
 
-	room.SetEmptyRoom()
+	room.SetEmpty()
 
 	removeItem(myItems, item)
 	return true

@@ -18,7 +18,7 @@ func OpenDoor(inputItem string, ableCommandsString string, defaultMap *[6][8]roo
 				continue
 			}
 
-			room.SetEmptyRoom()
+			room.SetEmpty()
 			break
 		}
 	case "유리문":
@@ -31,7 +31,7 @@ func OpenDoor(inputItem string, ableCommandsString string, defaultMap *[6][8]roo
 				continue
 			}
 
-			room.SetEmptyRoom()
+			room.SetEmpty()
 			removeItem(myItems, "망치")
 			break
 		}
