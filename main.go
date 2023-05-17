@@ -33,8 +33,6 @@ func main() {
 			thisRoom.PickUpItem(&systemMessage, &myItems)
 		}
 
-		// connectingRooms := [4]*rooms.Room{north, west, east, south}
-
 		connectingRooms := maps.GetConnectingRooms(&defaultMap, nowX, nowY)
 
 		var inputItem, inputCommand string
@@ -49,32 +47,30 @@ func main() {
 		maps.Print(systemMessage, defaultMap, nowX, nowY, myItemsString, ableCommandsString, connectingRooms)
 		fmt.Scanln(&inputItem, &inputCommand)
 
-		var hasActed bool
-
-		if inputCommand != "" && inputCommand == "사용" {
-			hasActed = maps.UseItem(inputItem, ableCommandsString, nowX, nowY, &myItems, connectingRooms)
-
-			if hasActed {
+		switch inputCommand {
+		case "사용":
+			if maps.UseItem(inputItem, ableCommandsString, nowX, nowY, &myItems, connectingRooms) {
 				systemMessage = "아이템을 사용했습니다."
 				continue
 			}
-		}
-
-		if inputCommand != "" && inputCommand == "열기" {
-			hasActed = maps.OpenDoor(inputItem, ableCommandsString, &defaultMap, nowX, nowY, connectingRooms, &myItems)
-
-			if hasActed {
+		case "열기":
+			if maps.OpenDoor(inputItem, ableCommandsString, &defaultMap, nowX, nowY, connectingRooms, &myItems) {
 				systemMessage = "문을 열었습니다."
 				continue
 			}
-		}
+		default:
+			switch inputItem[0] {
+			case "동"[0], "서"[0], "남"[0], "북"[0]:
+				if maps.Move(inputItem, ableCommandsString, &defaultMap, &nowX, &nowY) {
+					systemMessage = ""
+					continue
+				}
 
-		hasActed = maps.Move(inputItem, ableCommandsString, &defaultMap, &nowX, &nowY)
-		systemMessage = ""
-
-		if !hasActed {
-			systemMessage = "할 수 없는 행동이거나 행동 조건을 충족시키지 못했습니다."
-			continue
+				systemMessage = "할 수 없는 행동이거나 행동 조건을 충족시키지 못했습니다."
+			default:
+				systemMessage = "할 수 없는 행동이거나 행동 조건을 충족시키지 못했습니다."
+				continue
+			}
 		}
 	}
 
