@@ -9,10 +9,10 @@ import (
 const PADDING int = 60
 
 func Print(systemMessage string, defaultMap [6][8]rooms.Room, nowX int, nowY int, myItemsString string, ableCommandsString string, connectingRooms [4]*rooms.Room) {
-	north := connectingRooms[0]
+	north := connectingRooms[3]
 	west := connectingRooms[1]
-	east := connectingRooms[2]
-	south := connectingRooms[3]
+	east := connectingRooms[0]
+	south := connectingRooms[2]
 
 	utils.ClearConsoleWindows()
 	fmt.Println(systemMessage)

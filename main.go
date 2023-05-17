@@ -2,7 +2,7 @@ package main
 
 import (
 	"escape-room-challenge/maps"
-	"escape-room-challenge/rooms"
+	"escape-room-challenge/system"
 	"escape-room-challenge/types"
 	"escape-room-challenge/utils"
 	"fmt"
@@ -17,49 +17,31 @@ func main() {
 	var myItems []string
 
 	defaultMap[nowX][nowY].SetMyCharacter()
+	systemMessage := ""
 
 	for {
-
-		systemMessage := ""
-
 		thisRoom := &defaultMap[nowX][nowY]
+		var ableCommands []string
 
 		if thisRoom.IsGoal {
 			utils.PrintWIN()
 			break
 		}
-	CommandSwitch:
-		systemMessage, myItems = thisRoom.PickUpItem(systemMessage, myItems)
 
-		east, ableCommands, west, south, north := maps.MakeConsoleMap(&defaultMap, nowX, nowY)
-		connectingRooms := [4]*rooms.Room{north, west, east, south}
+		//무조건 먹게 하지 말고 줍게 하기...다음에...
+		if thisRoom.ItemType != types.NoItem {
+			thisRoom.PickUpItem(&systemMessage, &myItems)
+		}
+
+		// connectingRooms := [4]*rooms.Room{north, west, east, south}
+
+		connectingRooms := maps.GetConnectingRooms(&defaultMap, nowX, nowY)
 
 		var inputItem, inputCommand string
 
-		for _, v := range myItems {
-			ableCommands = append(ableCommands, v+" 사용")
-		}
-
-		for _, v := range connectingRooms {
-			if v.DoorType == types.NoDoorType {
-				continue
-			}
-
-			if v.DoorType == types.WoodType {
-				ableCommands = append(ableCommands, "나무문 열기")
-				continue
-			}
-
-			if v.DoorType == types.GlassType {
-				ableCommands = append(ableCommands, "유리문 열기")
-				continue
-			}
-
-			if v.DoorType == types.LockedType {
-				ableCommands = append(ableCommands, "잠긴문 열기")
-				continue
-			}
-		}
+		system.AddMoveCommands(connectingRooms, &ableCommands)
+		system.AddUseItemCommands(myItems, &ableCommands)
+		system.AddOpenDoorCommands(connectingRooms, &ableCommands)
 
 		ableCommandsString := strings.Join(ableCommands, ", ")
 		myItemsString := strings.Join(myItems, ", ")
@@ -74,7 +56,7 @@ func main() {
 
 			if hasActed {
 				systemMessage = "아이템을 사용했습니다."
-				goto CommandSwitch
+				continue
 			}
 		}
 
@@ -83,15 +65,16 @@ func main() {
 
 			if hasActed {
 				systemMessage = "문을 열었습니다."
-				goto CommandSwitch
+				continue
 			}
 		}
 
 		hasActed = maps.Move(inputItem, ableCommandsString, &defaultMap, &nowX, &nowY)
+		systemMessage = ""
 
 		if !hasActed {
 			systemMessage = "할 수 없는 행동이거나 행동 조건을 충족시키지 못했습니다."
-			goto CommandSwitch
+			continue
 		}
 	}
 
