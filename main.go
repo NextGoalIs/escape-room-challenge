@@ -16,8 +16,6 @@ func main() {
 	nowY := 1
 	var myItems []string
 
-	PADDING := 60
-
 	defaultMap[nowX][nowY].Icon = "🏃"
 
 	for {
@@ -66,7 +64,7 @@ func main() {
 		ableCommandsString := strings.Join(ableCommands, ", ")
 		myItemsString := strings.Join(myItems, ", ")
 
-		maps.Print(systemMessage, PADDING, defaultMap, nowX, nowY, myItemsString, ableCommandsString, connectingRooms)
+		maps.Print(systemMessage, defaultMap, nowX, nowY, myItemsString, ableCommandsString, connectingRooms)
 		fmt.Scanln(&inputItem, &inputCommand)
 
 		var hasActed bool
