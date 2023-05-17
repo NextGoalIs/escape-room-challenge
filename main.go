@@ -66,7 +66,7 @@ func main() {
 		ableCommandsString := strings.Join(ableCommands, ", ")
 		myItemsString := strings.Join(myItems, ", ")
 
-		maps.PrintDisplay(systemMessage, PADDING, defaultMap, nowX, nowY, myItemsString, ableCommandsString, connectingRooms)
+		maps.Print(systemMessage, PADDING, defaultMap, nowX, nowY, myItemsString, ableCommandsString, connectingRooms)
 		fmt.Scanln(&inputItem, &inputCommand)
 
 		var hasActed bool
