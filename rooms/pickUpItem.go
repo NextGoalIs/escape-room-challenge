@@ -2,7 +2,7 @@ package rooms
 
 import "escape-room-challenge/types"
 
-func (room *Room) PickUpCurrentRoomItem(systemMessage string, myItems []string) (string, []string) {
+func (room *Room) PickUpItem(systemMessage string, myItems []string) (string, []string) {
 	switch room.ItemType {
 	case types.NoItem:
 	case types.Key:

@@ -16,7 +16,7 @@ func main() {
 	nowY := 1
 	var myItems []string
 
-	defaultMap[nowX][nowY].Icon = "🏃"
+	defaultMap[nowX][nowY].SetMyCharacter()
 
 	for {
 
@@ -29,7 +29,7 @@ func main() {
 			break
 		}
 	CommandSwitch:
-		systemMessage, myItems = thisRoom.PickUpCurrentRoomItem(systemMessage, myItems)
+		systemMessage, myItems = thisRoom.PickUpItem(systemMessage, myItems)
 
 		east, ableCommands, west, south, north := maps.MakeConsoleMap(&defaultMap, nowX, nowY)
 		connectingRooms := [4]*rooms.Room{north, west, east, south}
