@@ -24,7 +24,7 @@ func main() {
 
 		thisRoom := &defaultMap[nowX][nowY]
 
-		if defaultMap[nowX][nowY].IsGoal {
+		if thisRoom.IsGoal {
 			utils.PrintWIN()
 			break
 		}
