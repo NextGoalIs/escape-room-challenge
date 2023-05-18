@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func OpenDoor(inputItem string, ableCommandsString string, defaultMap [][]rooms.Room, nowX int, nowY int, connectingRooms [4]*rooms.Room, myItems *[]string) bool {
+func OpenDoor(inputItem string, ableCommandsString string, stage mapStruct, connectingRooms [4]rooms.Room, myItems *[]string) bool {
 	if !strings.Contains(ableCommandsString, inputItem) {
 		return false
 	}

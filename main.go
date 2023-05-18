@@ -11,30 +11,27 @@ import (
 
 func main() {
 
-	defaultMap := maps.GetStage1()
-	nowX := 1
-	nowY := 1
+	stage1 := maps.GetStage1()
 	var myItems []string
 
-	defaultMap[nowX][nowY].SetMyCharacter()
+	stage1.GetThisLocation().SetMyCharacter()
 	systemMessage := ""
 
 	for {
-		thisRoom := &defaultMap[nowX][nowY]
 		var ableCommands []string
 		var inputItem, inputCommand string
 
-		if thisRoom.IsGoal {
+		if stage1.GetThisLocation().IsGoal {
 			utils.PrintWIN()
 			break
 		}
 
 		//무조건 먹게 하지 말고 줍게 하기...다음에...
-		if thisRoom.ItemType != types.NoItem {
-			thisRoom.PickUpItem(&systemMessage, &myItems)
+		if stage1.GetThisLocation().ItemType != types.NoItem {
+			stage1.GetThisLocation().PickUpItem(&systemMessage, &myItems)
 		}
 
-		connectingRooms := maps.GetConnectingRooms(defaultMap, nowX, nowY)
+		connectingRooms := stage1.GetConnectingRooms()
 
 		system.AddMoveCommands(connectingRooms, &ableCommands)
 		system.AddUseItemCommands(myItems, &ableCommands)
@@ -43,24 +40,24 @@ func main() {
 		ableCommandsString := strings.Join(ableCommands, ", ")
 		myItemsString := strings.Join(myItems, ", ")
 
-		maps.Print(systemMessage, defaultMap, nowX, nowY, myItemsString, ableCommandsString, connectingRooms)
+		maps.Print(systemMessage, stage1, myItemsString, ableCommandsString, connectingRooms)
 		fmt.Scanln(&inputItem, &inputCommand)
 
 		switch inputCommand {
 		case "사용":
-			if maps.UseItem(inputItem, ableCommandsString, nowX, nowY, &myItems, connectingRooms) {
+			if maps.UseItem(inputItem, ableCommandsString, &myItems, connectingRooms) {
 				systemMessage = "아이템을 사용했습니다."
 				continue
 			}
 		case "열기":
-			if maps.OpenDoor(inputItem, ableCommandsString, defaultMap, nowX, nowY, connectingRooms, &myItems) {
+			if maps.OpenDoor(inputItem, ableCommandsString, stage1, connectingRooms, &myItems) {
 				systemMessage = "문을 열었습니다."
 				continue
 			}
 		default:
 			switch inputItem[0] {
 			case "동"[0], "서"[0], "남"[0], "북"[0]:
-				if maps.Move(inputItem, ableCommandsString, defaultMap, &nowX, &nowY) {
+				if maps.Move(inputItem, ableCommandsString, &stage1) {
 					systemMessage = ""
 					continue
 				}

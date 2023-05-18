@@ -8,7 +8,7 @@ import (
 
 const PADDING int = 60
 
-func Print(systemMessage string, defaultMap [][]rooms.Room, nowX int, nowY int, myItemsString string, ableCommandsString string, connectingRooms [4]*rooms.Room) {
+func Print(systemMessage string, stage mapStruct, myItemsString string, ableCommandsString string, connectingRooms [4]rooms.Room) {
 	north := connectingRooms[3]
 	west := connectingRooms[1]
 	east := connectingRooms[0]
@@ -17,7 +17,7 @@ func Print(systemMessage string, defaultMap [][]rooms.Room, nowX int, nowY int, 
 	utils.ClearConsoleWindows()
 	fmt.Println(systemMessage)
 	println(utils.GetStringCenter(north.Icon, PADDING-len(west.Icon)))
-	println(utils.GetStringCenter(west.Icon+" "+defaultMap[nowX][nowY].Icon+" "+east.Icon, PADDING))
+	println(utils.GetStringCenter(west.Icon+" "+stage.nowMap[stage.nowX][stage.nowY].Icon+" "+east.Icon, PADDING))
 	println(utils.GetStringCenter(south.Icon, PADDING-len(west.Icon)))
 	println()
 	fmt.Println("가지고 있는 물건 : " + myItemsString)
