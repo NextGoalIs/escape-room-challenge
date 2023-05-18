@@ -6,11 +6,11 @@ type Room struct {
 	Icon string
 
 	DoorType types.DoorTypes
-	ItemType types.ItemTypes
+	ItemType types.UsingItemTypes
 	IsGoal   bool
 }
 
-func NewRoom(doorType types.DoorTypes, itemType types.ItemTypes, isGoal bool) Room {
+func NewRoom(doorType types.DoorTypes, itemType types.UsingItemTypes, isGoal bool) Room {
 
 	room := Room{Icon: "🔳"}
 
