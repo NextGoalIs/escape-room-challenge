@@ -65,7 +65,7 @@ func main() {
 					continue
 				}
 
-				systemMessage = "할 수 없는 행동이거나 행동 조건을 충족시키지 못했습니다."
+				fallthrough
 			default:
 				systemMessage = "할 수 없는 행동이거나 행동 조건을 충족시키지 못했습니다."
 				continue
