@@ -6,10 +6,7 @@ import (
 )
 
 func GetStage1() [][]rooms.Room {
-	var defaultMap = make([][]rooms.Room, 6)
-	for i := range defaultMap {
-		defaultMap[i] = make([]rooms.Room, 8)
-	}
+	var defaultMap = setRooms(6, 8)
 	defaultMap[3][0] = rooms.NewRoom(types.NoDoorType, types.Hammer, false) // 망치
 	defaultMap[1][1] = rooms.NewRoom(types.NoDoorType, types.NoItem, false) // 스타트지점
 	defaultMap[2][1] = rooms.NewRoom(types.NoDoorType, types.NoItem, false)
