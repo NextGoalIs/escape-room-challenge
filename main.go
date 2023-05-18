@@ -22,6 +22,7 @@ func main() {
 	for {
 		thisRoom := &defaultMap[nowX][nowY]
 		var ableCommands []string
+		var inputItem, inputCommand string
 
 		if thisRoom.IsGoal {
 			utils.PrintWIN()
@@ -34,8 +35,6 @@ func main() {
 		}
 
 		connectingRooms := maps.GetConnectingRooms(&defaultMap, nowX, nowY)
-
-		var inputItem, inputCommand string
 
 		system.AddMoveCommands(connectingRooms, &ableCommands)
 		system.AddUseItemCommands(myItems, &ableCommands)
