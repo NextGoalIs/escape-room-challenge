@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func Move(selectedCommand string, ableCommandsString string, defaultMap *[6][8]rooms.Room, nowX *int, nowY *int) bool {
+func Move(selectedCommand string, ableCommandsString string, defaultMap [][]rooms.Room, nowX *int, nowY *int) bool {
 	reg, _ := regexp.Compile("^동.*")
 
 	isEast := reg.MatchString(selectedCommand)

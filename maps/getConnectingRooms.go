@@ -2,7 +2,7 @@ package maps
 
 import "escape-room-challenge/rooms"
 
-func GetConnectingRooms(defaultMap *[6][8]rooms.Room, nowX int, nowY int) [4]*rooms.Room {
+func GetConnectingRooms(defaultMap [][]rooms.Room, nowX int, nowY int) [4]*rooms.Room {
 	var north, east, south, west *rooms.Room
 
 	if (nowY+1 < len(defaultMap[nowX])) && defaultMap[nowX][nowY+1].Icon != "" {

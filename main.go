@@ -11,7 +11,7 @@ import (
 
 func main() {
 
-	defaultMap := maps.GetMap()
+	defaultMap := maps.GetStage1()
 	nowX := 1
 	nowY := 1
 	var myItems []string
@@ -34,7 +34,7 @@ func main() {
 			thisRoom.PickUpItem(&systemMessage, &myItems)
 		}
 
-		connectingRooms := maps.GetConnectingRooms(&defaultMap, nowX, nowY)
+		connectingRooms := maps.GetConnectingRooms(defaultMap, nowX, nowY)
 
 		system.AddMoveCommands(connectingRooms, &ableCommands)
 		system.AddUseItemCommands(myItems, &ableCommands)
@@ -53,14 +53,14 @@ func main() {
 				continue
 			}
 		case "열기":
-			if maps.OpenDoor(inputItem, ableCommandsString, &defaultMap, nowX, nowY, connectingRooms, &myItems) {
+			if maps.OpenDoor(inputItem, ableCommandsString, defaultMap, nowX, nowY, connectingRooms, &myItems) {
 				systemMessage = "문을 열었습니다."
 				continue
 			}
 		default:
 			switch inputItem[0] {
 			case "동"[0], "서"[0], "남"[0], "북"[0]:
-				if maps.Move(inputItem, ableCommandsString, &defaultMap, &nowX, &nowY) {
+				if maps.Move(inputItem, ableCommandsString, defaultMap, &nowX, &nowY) {
 					systemMessage = ""
 					continue
 				}
