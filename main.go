@@ -20,7 +20,7 @@ func main() {
 
 	for {
 		var ableCommands []string
-		var inputItem, inputCommand string
+		var inputItemCommand, inputCommand string
 
 		if stage1.GetThisLocation().IsGoal {
 			utils.PrintWIN()
@@ -42,23 +42,23 @@ func main() {
 		myItemsString := strings.Join(char.Items, ", ")
 
 		maps.Print(systemMessage, stage1, myItemsString, ableCommandsString, connectingRooms)
-		fmt.Scanln(&inputItem, &inputCommand)
+		fmt.Scanln(&inputItemCommand, &inputCommand)
 
 		switch inputCommand {
 		case "사용":
-			if maps.UseItem(inputItem, ableCommandsString, &char.Items, connectingRooms) {
+			if maps.UseItem(inputItemCommand, ableCommandsString, &char.Items, connectingRooms) {
 				systemMessage = "아이템을 사용했습니다."
 				continue
 			}
 		case "열기":
-			if maps.OpenDoor(inputItem, ableCommandsString, connectingRooms, &char.Items) {
+			if maps.OpenDoor(inputItemCommand, ableCommandsString, connectingRooms, &char.Items) {
 				systemMessage = "문을 열었습니다."
 				continue
 			}
 		default:
-			switch inputItem[0] {
+			switch inputItemCommand[0] {
 			case "동"[0], "서"[0], "남"[0], "북"[0]:
-				if maps.Move(inputItem, ableCommandsString, &stage1) {
+				if maps.Move(inputItemCommand, ableCommandsString, &stage1) {
 					systemMessage = ""
 					continue
 				}
