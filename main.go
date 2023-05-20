@@ -15,6 +15,8 @@ func main() {
 	stage1 := maps.GetStage1()
 	char := character.Character{}
 
+	char.SetName()
+
 	stage1.GetThisLocation().SetMyCharacter()
 	systemMessage := ""
 
