@@ -1,10 +1,14 @@
 package rooms
 
-import "escape-room-challenge/types"
+import (
+	"escape-room-challenge/character"
+	"escape-room-challenge/types"
+)
 
 type Room struct {
 	Icon string
 
+	Char     *character.Character
 	DoorType types.DoorTypes
 	ItemType types.UsingItemTypes
 	IsGoal   bool

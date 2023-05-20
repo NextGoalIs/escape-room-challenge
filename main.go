@@ -1,6 +1,7 @@
 package main
 
 import (
+	"escape-room-challenge/character"
 	"escape-room-challenge/maps"
 	"escape-room-challenge/system"
 	"escape-room-challenge/types"
@@ -12,7 +13,7 @@ import (
 func main() {
 
 	stage1 := maps.GetStage1()
-	var myItems []string
+	char := character.Character{}
 
 	stage1.GetThisLocation().SetMyCharacter()
 	systemMessage := ""
@@ -28,29 +29,29 @@ func main() {
 
 		//무조건 먹게 하지 말고 줍게 하기...다음에...
 		if stage1.GetThisLocation().ItemType != types.NoItem {
-			stage1.GetThisLocation().PickUpItem(&systemMessage, &myItems)
+			stage1.GetThisLocation().PickUpItem(&systemMessage, &char)
 		}
 
 		connectingRooms := stage1.GetConnectingRooms()
 
 		system.AddMoveCommands(connectingRooms, &ableCommands)
-		system.AddUseItemCommands(myItems, &ableCommands)
+		system.AddUseItemCommands(char.Items, &ableCommands)
 		system.AddOpenDoorCommands(connectingRooms, &ableCommands)
 
 		ableCommandsString := strings.Join(ableCommands, ", ")
-		myItemsString := strings.Join(myItems, ", ")
+		myItemsString := strings.Join(char.Items, ", ")
 
 		maps.Print(systemMessage, stage1, myItemsString, ableCommandsString, connectingRooms)
 		fmt.Scanln(&inputItem, &inputCommand)
 
 		switch inputCommand {
 		case "사용":
-			if maps.UseItem(inputItem, ableCommandsString, &myItems, connectingRooms) {
+			if maps.UseItem(inputItem, ableCommandsString, &char.Items, connectingRooms) {
 				systemMessage = "아이템을 사용했습니다."
 				continue
 			}
 		case "열기":
-			if maps.OpenDoor(inputItem, ableCommandsString, stage1, connectingRooms, &myItems) {
+			if maps.OpenDoor(inputItem, ableCommandsString, connectingRooms, &char.Items) {
 				systemMessage = "문을 열었습니다."
 				continue
 			}

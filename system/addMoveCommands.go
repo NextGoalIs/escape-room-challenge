@@ -5,7 +5,7 @@ import (
 	"escape-room-challenge/types"
 )
 
-func AddMoveCommands(connectingRooms [4]rooms.Room, ableCommands *[]string) {
+func AddMoveCommands(connectingRooms [4]*rooms.Room, ableCommands *[]string) {
 	for i, v := range connectingRooms {
 		if v.Icon != string(types.WallIcon) && v.DoorType == types.NoDoorType {
 			switch i {

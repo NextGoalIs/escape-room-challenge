@@ -8,7 +8,7 @@ import (
 
 const PADDING int = 60
 
-func Print(systemMessage string, stage mapStruct, myItemsString string, ableCommandsString string, connectingRooms [4]rooms.Room) {
+func Print(systemMessage string, stage mapStruct, myItemsString string, ableCommandsString string, connectingRooms [4]*rooms.Room) {
 	north := connectingRooms[3]
 	west := connectingRooms[1]
 	east := connectingRooms[0]

@@ -5,7 +5,7 @@ import (
 	"escape-room-challenge/types"
 )
 
-func AddOpenDoorCommands(connectingRooms [4]rooms.Room, ableCommands *[]string) {
+func AddOpenDoorCommands(connectingRooms [4]*rooms.Room, ableCommands *[]string) {
 	for _, v := range connectingRooms {
 		if v.DoorType == types.NoDoorType {
 			continue
