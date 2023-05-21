@@ -1,4 +1,4 @@
-package character
+package unit
 
 import (
 	"escape-room-challenge/utils"

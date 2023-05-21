@@ -1,10 +1,10 @@
 package main
 
 import (
-	"escape-room-challenge/character"
 	"escape-room-challenge/maps"
 	"escape-room-challenge/system"
 	"escape-room-challenge/types"
+	"escape-room-challenge/unit"
 	"escape-room-challenge/utils"
 	"fmt"
 	"strings"
@@ -12,10 +12,10 @@ import (
 
 func main() {
 
-	stage1 := maps.GetStage1()
-	char := character.Character{}
-
+	char := unit.Character{}
 	char.SetName()
+
+	stage1 := maps.GetStage1()
 
 	stage1.GetThisLocation().SetMyCharacter()
 	systemMessage := ""

@@ -1,11 +1,11 @@
 package rooms
 
 import (
-	"escape-room-challenge/character"
 	"escape-room-challenge/types"
+	"escape-room-challenge/unit"
 )
 
-func (room *Room) PickUpItem(systemMessage *string, char *character.Character) {
+func (room *Room) PickUpItem(systemMessage *string, char *unit.Character) {
 	switch room.ItemType {
 	case types.NoItem:
 	case types.Key:
