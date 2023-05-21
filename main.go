@@ -29,10 +29,7 @@ func main() {
 
 		connectingRooms := stage1.GetConnectingRooms()
 
-		system.AddMoveCommands(connectingRooms, &ableCommands)
-		system.AddUseItemCommands(char.Items, &ableCommands)
-		system.AddOpenDoorCommands(connectingRooms, &ableCommands)
-		system.AddDefaultCommands(&ableCommands)
+		system.AddCommands(connectingRooms, &ableCommands, char)
 
 		switch isLookAtRoom {
 		case true:
