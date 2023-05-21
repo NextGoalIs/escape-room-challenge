@@ -24,6 +24,8 @@ func GetStage1() mapStruct {
 	defaultMap[5][6] = rooms.NewRoom(types.NoDoorType, types.NoItem, false)
 	defaultMap[5][7] = rooms.NewRoom(types.LockedType, types.NoItem, true) // 열쇠가 필요한 문
 
+	defaultMap[1][1].SetMyCharacter()
+
 	return mapStruct{nowX: 1, nowY: 1, nowMap: defaultMap}
 }
 

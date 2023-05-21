@@ -16,7 +16,6 @@ func main() {
 
 	stage1 := maps.GetStage1()
 
-	stage1.GetThisLocation().SetMyCharacter()
 	systemMessage := ""
 	isLookAtRoom := false
 
