@@ -39,7 +39,7 @@ func GetStage2() MapStruct {
 	m[6][9] = rooms.NewRoom(types.GlassType, types.Chest, false, types.NoUnit)
 	m[2][9] = rooms.NewRoom(types.NoDoorType, types.DroppedWoodSword, false, types.NoUnit)
 	m[1][9] = rooms.NewRoom(types.NoDoorType, types.NoItem, false, types.NoUnit)
-	m[0][9] = rooms.NewRoom(types.NoDoorType, types.NoItem, false, types.Character)
+	m[0][9] = rooms.NewRoom(types.NoDoorType, types.NoItem, false, types.NoUnit)
 
 	m[0][9].SetMyCharacter()
 

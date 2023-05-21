@@ -7,8 +7,8 @@ import (
 
 func GetStage1() MapStruct {
 	var defaultMap = setRooms(6, 8)
-	defaultMap[3][0] = rooms.NewRoom(types.NoDoorType, types.Hammer, false, types.NoUnit)    // 망치
-	defaultMap[1][1] = rooms.NewRoom(types.NoDoorType, types.NoItem, false, types.Character) // 스타트지점
+	defaultMap[3][0] = rooms.NewRoom(types.NoDoorType, types.Hammer, false, types.NoUnit) // 망치
+	defaultMap[1][1] = rooms.NewRoom(types.NoDoorType, types.NoItem, false, types.NoUnit) // 스타트지점
 	defaultMap[2][1] = rooms.NewRoom(types.NoDoorType, types.NoItem, false, types.NoUnit)
 	defaultMap[3][1] = rooms.NewRoom(types.NoDoorType, types.NoItem, false, types.NoUnit)
 	defaultMap[3][2] = rooms.NewRoom(types.GlassType, types.NoItem, false, types.NoUnit) // 유리문 방

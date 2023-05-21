@@ -26,9 +26,14 @@ func Print(isLookAtRoom bool, systemMessage *string, stage maps.MapStruct, char 
 	case true:
 		firstThing := setIcon(stage.GetThisLocation().ItemType)
 
-		*systemMessage = setSystemMessage(stage.GetThisLocation().ItemType)
+		enemy := ""
+		if stage.GetThisLocation().Unit != types.NoUnit {
+			enemy = types.EnemyIcon
+		}
 
-		if firstThing == "" {
+		*systemMessage = setSystemItemMessage(stage.GetThisLocation().ItemType)
+
+		if firstThing == "" && enemy == "" {
 			*systemMessage = "이 방엔 아무것도 없는 듯 하다..."
 		}
 
@@ -36,11 +41,15 @@ func Print(isLookAtRoom bool, systemMessage *string, stage maps.MapStruct, char 
 		fmt.Println(*systemMessage)
 		println(utils.GetStringCenter(string(firstThing)+" "+north.Icon+" ", PADDING-len(west.Icon)))
 		println(utils.GetStringCenter(west.Icon+" "+stage.GetNowMap()[stage.GetX()][stage.GetY()].Icon+" "+east.Icon, PADDING))
-		println(utils.GetStringCenter(" "+south.Icon+" ", PADDING-len(west.Icon)))
+		println(utils.GetStringCenter(enemy+south.Icon, PADDING-len(west.Icon)))
 		println()
 		fmt.Println("행동 : " + strings.Join(ableCommands, ", "))
 		print(">>>  ")
 	default:
+		if stage.GetThisLocation().ItemType != types.NoItem || stage.GetThisLocation().Unit != types.NoUnit {
+			*systemMessage = "이 방에 무언가 있는 것 같다."
+		}
+
 		utils.ClearConsoleWindows()
 		fmt.Println(*systemMessage)
 		println(utils.GetStringCenter(north.Icon, PADDING-len(west.Icon)))
@@ -69,7 +78,7 @@ func setIcon(itemType types.UsingItemTypes) types.UsingItemIcons {
 	}
 }
 
-func setSystemMessage(itemType types.UsingItemTypes) string {
+func setSystemItemMessage(itemType types.UsingItemTypes) string {
 	switch itemType {
 	case types.Chest:
 		return "방에 상자가 있다."

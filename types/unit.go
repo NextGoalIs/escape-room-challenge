@@ -9,3 +9,5 @@ const (
 	Rabbit
 	Squirrel
 )
+
+const EnemyIcon string = "🎃 "
