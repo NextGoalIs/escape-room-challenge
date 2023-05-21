@@ -4,9 +4,30 @@ import (
 	"escape-room-challenge/maps"
 	"escape-room-challenge/rooms"
 	"escape-room-challenge/unit"
+	"strings"
 )
 
-func Act(firstCommand string, secondCommand string, thirdCommand string, ableCommands []string, char *unit.Character, connectingRooms [4]*rooms.Room, systemMessage *string, isLookAtRoom *bool, stage1 *maps.MapStruct) {
+func Act(input string, ableCommands []string, char *unit.Character, connectingRooms [4]*rooms.Room, systemMessage *string, isLookAtRoom *bool, stage1 *maps.MapStruct) {
+
+	commandSlice := strings.Split(input, " ")
+	firstCommand := ""
+	secondCommand := ""
+	thirdCommand := ""
+
+	switch len(commandSlice) {
+	case 1:
+		firstCommand = commandSlice[0]
+	case 2:
+		firstCommand = commandSlice[0]
+		secondCommand = commandSlice[1]
+	case 3:
+		firstCommand = commandSlice[0]
+		secondCommand = commandSlice[1]
+		thirdCommand = commandSlice[2]
+
+	default:
+	}
+
 	switch secondCommand {
 	case "사용":
 		if maps.UseItem(firstCommand, ableCommands, &char.Items, connectingRooms, thirdCommand) {
@@ -39,8 +60,8 @@ func Act(firstCommand string, secondCommand string, thirdCommand string, ableCom
 		*systemMessage = "할 수 없는 행동이거나 행동 조건을 충족시키지 못했습니다."
 		return
 	default:
-		switch firstCommand[0] {
-		case "동"[0], "서"[0], "남"[0], "북"[0]:
+		switch firstCommand {
+		case "동", "서", "남", "북":
 			if maps.Move(firstCommand, ableCommands, stage1) {
 				*isLookAtRoom = false
 				*systemMessage = ""
