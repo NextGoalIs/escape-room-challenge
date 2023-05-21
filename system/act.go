@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func Act(input string, ableCommands []string, char *unit.Character, systemMessage *string, isLookAtRoom *bool, stage *maps.MapStruct) {
+func Act(input string, char *unit.Character, systemMessage *string, isLookAtRoom *bool, stage *maps.MapStruct) {
 
 	connectingRooms := stage.GetConnectingRooms()
 
@@ -31,13 +31,13 @@ func Act(input string, ableCommands []string, char *unit.Character, systemMessag
 
 	switch secondCommand {
 	case "사용":
-		if maps.UseItem(firstCommand, ableCommands, &char.Items, connectingRooms, thirdCommand) {
+		if maps.UseItem(firstCommand, &char.Items, connectingRooms, thirdCommand) {
 			*systemMessage = "아이템을 사용했습니다."
 			*isLookAtRoom = false
 			return
 		}
 	case "열기":
-		if maps.OpenDoor(firstCommand, ableCommands, connectingRooms, &char.Items) {
+		if maps.OpenDoor(firstCommand, connectingRooms, &char.Items) {
 			*systemMessage = "문을 열었습니다."
 			*isLookAtRoom = false
 			return
@@ -63,7 +63,7 @@ func Act(input string, ableCommands []string, char *unit.Character, systemMessag
 	default:
 		switch firstCommand {
 		case "동", "서", "남", "북":
-			if maps.Move(firstCommand, ableCommands, stage) {
+			if maps.Move(firstCommand, stage) {
 				*isLookAtRoom = false
 				*systemMessage = ""
 				return

@@ -3,12 +3,16 @@ package system
 import (
 	"escape-room-challenge/maps"
 	"escape-room-challenge/types"
+	"escape-room-challenge/unit"
 	"escape-room-challenge/utils"
 	"fmt"
 	"strings"
 )
 
-func Print(isLookAtRoom bool, systemMessage *string, stage maps.MapStruct, ableCommands []string) {
+func Print(isLookAtRoom bool, systemMessage *string, stage maps.MapStruct, char unit.Character) {
+
+	var ableCommands []string
+	AddCommands(stage, &ableCommands, char)
 
 	const PADDING int = 60
 

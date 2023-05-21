@@ -1,6 +1,9 @@
 package maps
 
-import "escape-room-challenge/rooms"
+import (
+	"escape-room-challenge/rooms"
+	"escape-room-challenge/types"
+)
 
 type MapStruct struct {
 	nowX int
@@ -63,4 +66,17 @@ func (m MapStruct) GetConnectingRooms() [4]*rooms.Room {
 		north = rooms.GetWall()
 	}
 	return [4]*rooms.Room{east, west, south, north}
+}
+
+func (m *MapStruct) CanMove(r *rooms.Room) bool {
+
+	if r.IsWall {
+		return false
+	}
+
+	if r.DoorType != types.NoDoorType {
+		return false
+	}
+
+	return true
 }

@@ -11,6 +11,7 @@ type Room struct {
 	DoorType types.DoorTypes
 	ItemType types.UsingItemTypes
 	IsGoal   bool
+	IsWall   bool
 }
 
 func NewRoom(doorType types.DoorTypes, itemType types.UsingItemTypes, isGoal bool, unitType types.UnitTypes) Room {

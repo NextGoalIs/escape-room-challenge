@@ -6,7 +6,7 @@ import (
 	"escape-room-challenge/utils"
 )
 
-func OpenDoor(inputItem string, ableCommands []string, connectingRooms [4]*rooms.Room, myItems *[]string) bool {
+func OpenDoor(inputItem string, connectingRooms [4]*rooms.Room, myItems *[]string) bool {
 
 	switch inputItem {
 	case "나무문":
@@ -19,7 +19,7 @@ func OpenDoor(inputItem string, ableCommands []string, connectingRooms [4]*rooms
 			break
 		}
 	case "유리문":
-		if !utils.Contains(ableCommands, "망치 사용") {
+		if !utils.Contains(*myItems, "망치") {
 			return false
 		}
 
@@ -33,7 +33,7 @@ func OpenDoor(inputItem string, ableCommands []string, connectingRooms [4]*rooms
 			break
 		}
 	case "잠긴문":
-		if !utils.Contains(ableCommands, "열쇠 사용") {
+		if !utils.Contains(*myItems, "열쇠") {
 			return false
 		}
 

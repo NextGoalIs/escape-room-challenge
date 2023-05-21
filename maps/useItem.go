@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func UseItem(selectedCommand string, ableCommands []string, myItems *[]string, connectingRooms [4]*rooms.Room, thirdCommand string) bool {
+func UseItem(selectedCommand string, myItems *[]string, connectingRooms [4]*rooms.Room, thirdCommand string) bool {
 
 	for _, item := range *myItems {
 		if !strings.Contains(selectedCommand, item) {
