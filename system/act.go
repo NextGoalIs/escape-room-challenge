@@ -2,12 +2,13 @@ package system
 
 import (
 	"escape-room-challenge/maps"
-	"escape-room-challenge/rooms"
 	"escape-room-challenge/unit"
 	"strings"
 )
 
-func Act(input string, ableCommands []string, char *unit.Character, connectingRooms [4]*rooms.Room, systemMessage *string, isLookAtRoom *bool, stage1 *maps.MapStruct) {
+func Act(input string, ableCommands []string, char *unit.Character, systemMessage *string, isLookAtRoom *bool, stage *maps.MapStruct) {
+
+	connectingRooms := stage.GetConnectingRooms()
 
 	commandSlice := strings.Split(input, " ")
 	firstCommand := ""
@@ -53,7 +54,7 @@ func Act(input string, ableCommands []string, char *unit.Character, connectingRo
 		*systemMessage = "할 수 없는 행동이거나 행동 조건을 충족시키지 못했습니다."
 		return
 	case "줍기":
-		if stage1.GetThisLocation().PickUpItem(systemMessage, char) {
+		if stage.GetThisLocation().PickUpItem(systemMessage, char) {
 			*isLookAtRoom = false
 			return
 		}
@@ -62,7 +63,7 @@ func Act(input string, ableCommands []string, char *unit.Character, connectingRo
 	default:
 		switch firstCommand {
 		case "동", "서", "남", "북":
-			if maps.Move(firstCommand, ableCommands, stage1) {
+			if maps.Move(firstCommand, ableCommands, stage) {
 				*isLookAtRoom = false
 				*systemMessage = ""
 				return

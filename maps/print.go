@@ -1,7 +1,6 @@
 package maps
 
 import (
-	"escape-room-challenge/rooms"
 	"escape-room-challenge/types"
 	"escape-room-challenge/utils"
 	"fmt"
@@ -10,7 +9,9 @@ import (
 
 const PADDING int = 60
 
-func Print(systemMessage string, stage MapStruct, ableCommands []string, connectingRooms [4]*rooms.Room) {
+func Print(systemMessage string, stage MapStruct, ableCommands []string) {
+	connectingRooms := stage.GetConnectingRooms()
+
 	north := connectingRooms[3]
 	west := connectingRooms[1]
 	east := connectingRooms[0]
@@ -27,7 +28,9 @@ func Print(systemMessage string, stage MapStruct, ableCommands []string, connect
 	print(">>>  ")
 }
 
-func LookAtRoomPrint(systemMessage string, stage MapStruct, ableCommands []string, connectingRooms [4]*rooms.Room) {
+func LookAtRoomPrint(systemMessage string, stage MapStruct, ableCommands []string) {
+	connectingRooms := stage.GetConnectingRooms()
+
 	north := connectingRooms[3]
 	west := connectingRooms[1]
 	east := connectingRooms[0]

@@ -1,12 +1,15 @@
 package system
 
 import (
+	"escape-room-challenge/maps"
 	"escape-room-challenge/rooms"
 	"escape-room-challenge/types"
 	"escape-room-challenge/unit"
 )
 
-func AddCommands(connectingRooms [4]*rooms.Room, ableCommands *[]string, char unit.Character) {
+func AddCommands(stage maps.MapStruct, ableCommands *[]string, char unit.Character) {
+	connectingRooms := stage.GetConnectingRooms()
+
 	AddMoveCommands(connectingRooms, ableCommands)
 	AddUseItemCommands(char.Items, ableCommands)
 	AddOpenDoorCommands(connectingRooms, ableCommands)

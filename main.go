@@ -30,18 +30,16 @@ func main() {
 			break
 		}
 
-		connectingRooms := stage.GetConnectingRooms()
-
-		system.AddCommands(connectingRooms, &ableCommands, char)
+		system.AddCommands(stage, &ableCommands, char)
 
 		switch isLookAtRoom {
 		case true:
-			maps.LookAtRoomPrint(systemMessage, stage, ableCommands, connectingRooms)
+			maps.LookAtRoomPrint(systemMessage, stage, ableCommands)
 			input, _ = reader.ReadString('\n')
 			input = strings.TrimSpace(input)
 			// fmt.Scanln(&firstCommand, &secondCommand, &thirdCommand)
 		default:
-			maps.Print(systemMessage, stage, ableCommands, connectingRooms)
+			maps.Print(systemMessage, stage, ableCommands)
 			input, _ = reader.ReadString('\n')
 			input = strings.TrimSpace(input)
 			// fmt.Scanln(&firstCommand, &secondCommand, &thirdCommand)
@@ -49,7 +47,7 @@ func main() {
 
 		//나머지 처리 미완
 		// system.AddLookAtMessage(firstCommand)
-		system.Act(input, ableCommands, &char, connectingRooms, &systemMessage, &isLookAtRoom, &stage)
+		system.Act(input, ableCommands, &char, &systemMessage, &isLookAtRoom, &stage)
 	}
 
 }
