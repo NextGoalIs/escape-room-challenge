@@ -14,7 +14,7 @@ func main() {
 	char := unit.Character{}
 	char.SetName()
 
-	stage1 := maps.GetStage1()
+	stage1 := maps.GetStage2()
 
 	systemMessage := ""
 	isLookAtRoom := false

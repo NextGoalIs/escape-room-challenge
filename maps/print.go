@@ -58,6 +58,12 @@ func setIcon(itemType types.UsingItemTypes) types.UsingItemIcons {
 		return types.KeyIcon
 	case types.Hammer:
 		return types.HammerIcon
+	case types.Chest:
+		return types.ChestIcon
+	case types.Potion:
+		return types.PotionIcon
+	case types.WoodSword:
+		return types.WoodSwordIcon
 	default:
 		return types.NoItemIcon
 	}
