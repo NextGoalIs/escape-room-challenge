@@ -8,7 +8,7 @@ import (
 type Room struct {
 	Icon string
 
-	Char     *unit.Character
+	Unit     *unit.Character
 	DoorType types.DoorTypes
 	ItemType types.UsingItemTypes
 	IsGoal   bool
