@@ -6,7 +6,6 @@ import (
 	"escape-room-challenge/unit"
 	"escape-room-challenge/utils"
 	"fmt"
-	"strings"
 )
 
 func main() {
@@ -35,14 +34,12 @@ func main() {
 		system.AddOpenDoorCommands(connectingRooms, &ableCommands)
 		system.AddDefaultCommands(&ableCommands)
 
-		myItemsString := strings.Join(char.Items, ", ")
-
 		switch isLookAtRoom {
 		case true:
-			maps.LookAtRoomPrint(systemMessage, stage1, myItemsString, ableCommands, connectingRooms)
+			maps.LookAtRoomPrint(systemMessage, stage1, ableCommands, connectingRooms)
 			fmt.Scanln(&firstCommand, &secondCommand, &thirdCommand)
 		default:
-			maps.Print(systemMessage, stage1, myItemsString, ableCommands, connectingRooms)
+			maps.Print(systemMessage, stage1, ableCommands, connectingRooms)
 			fmt.Scanln(&firstCommand, &secondCommand, &thirdCommand)
 		}
 
