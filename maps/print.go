@@ -5,11 +5,12 @@ import (
 	"escape-room-challenge/types"
 	"escape-room-challenge/utils"
 	"fmt"
+	"strings"
 )
 
 const PADDING int = 60
 
-func Print(systemMessage string, stage mapStruct, myItemsString string, ableCommandsString string, connectingRooms [4]*rooms.Room) {
+func Print(systemMessage string, stage mapStruct, myItemsString string, ableCommands []string, connectingRooms [4]*rooms.Room) {
 	north := connectingRooms[3]
 	west := connectingRooms[1]
 	east := connectingRooms[0]
@@ -22,12 +23,12 @@ func Print(systemMessage string, stage mapStruct, myItemsString string, ableComm
 	println(utils.GetStringCenter(south.Icon, PADDING-len(west.Icon)))
 	println()
 	fmt.Println("가지고 있는 물건 : " + myItemsString)
-	fmt.Println("행동 : " + ableCommandsString)
+	fmt.Println("행동 : " + strings.Join(ableCommands, ", "))
 
 	print(">>>  ")
 }
 
-func LookAtRoomPrint(systemMessage string, stage mapStruct, myItemsString string, ableCommandsString string, connectingRooms [4]*rooms.Room) {
+func LookAtRoomPrint(systemMessage string, stage mapStruct, myItemsString string, ableCommands []string, connectingRooms [4]*rooms.Room) {
 	north := connectingRooms[3]
 	west := connectingRooms[1]
 	east := connectingRooms[0]
@@ -47,7 +48,7 @@ func LookAtRoomPrint(systemMessage string, stage mapStruct, myItemsString string
 	println(utils.GetStringCenter(" "+south.Icon+" ", PADDING-len(west.Icon)))
 	println()
 	fmt.Println("가지고 있는 물건 : " + myItemsString)
-	fmt.Println("행동 : " + ableCommandsString)
+	fmt.Println("행동 : " + strings.Join(ableCommands, ", "))
 
 	print(">>>  ")
 }

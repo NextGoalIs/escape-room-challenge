@@ -3,13 +3,10 @@ package maps
 import (
 	"escape-room-challenge/rooms"
 	"escape-room-challenge/types"
-	"strings"
+	"escape-room-challenge/utils"
 )
 
-func OpenDoor(inputItem string, ableCommandsString string, connectingRooms [4]*rooms.Room, myItems *[]string) bool {
-	if !strings.Contains(ableCommandsString, inputItem) {
-		return false
-	}
+func OpenDoor(inputItem string, ableCommands []string, connectingRooms [4]*rooms.Room, myItems *[]string) bool {
 
 	switch inputItem {
 	case "나무문":
@@ -22,7 +19,7 @@ func OpenDoor(inputItem string, ableCommandsString string, connectingRooms [4]*r
 			break
 		}
 	case "유리문":
-		if !strings.Contains(ableCommandsString, "망치 사용") {
+		if !utils.Contains(ableCommands, "망치 사용") {
 			return false
 		}
 
@@ -36,7 +33,7 @@ func OpenDoor(inputItem string, ableCommandsString string, connectingRooms [4]*r
 			break
 		}
 	case "잠긴문":
-		if !strings.Contains(ableCommandsString, "열쇠 사용") {
+		if !utils.Contains(ableCommands, "열쇠 사용") {
 			return false
 		}
 

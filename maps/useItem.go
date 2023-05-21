@@ -6,10 +6,7 @@ import (
 	"strings"
 )
 
-func UseItem(selectedCommand string, ableCommandsString string, myItems *[]string, connectingRooms [4]*rooms.Room, thirdCommand string) bool {
-	if !strings.Contains(ableCommandsString, selectedCommand) {
-		return false
-	}
+func UseItem(selectedCommand string, ableCommands []string, myItems *[]string, connectingRooms [4]*rooms.Room, thirdCommand string) bool {
 
 	for _, item := range *myItems {
 		if !strings.Contains(selectedCommand, item) {
@@ -40,7 +37,11 @@ func useHammer(item string, room *rooms.Room, myItems *[]string, thirdCommand st
 		return false
 	}
 
-	if room.DoorType != types.GlassType && thirdCommand != "유리문" {
+	if room.DoorType != types.GlassType {
+		return false
+	}
+
+	if thirdCommand != "유리문" {
 		return false
 	}
 
@@ -55,7 +56,11 @@ func useKey(item string, room *rooms.Room, myItems *[]string, thirdCommand strin
 		return false
 	}
 
-	if room.DoorType != types.LockedType && thirdCommand != "잠긴문" {
+	if room.DoorType != types.LockedType {
+		return false
+	}
+
+	if thirdCommand != "잠긴문" {
 		return false
 	}
 

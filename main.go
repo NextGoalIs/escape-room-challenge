@@ -14,7 +14,7 @@ func main() {
 	char := unit.Character{}
 	char.SetName()
 
-	stage1 := maps.GetStage2()
+	stage1 := maps.GetStage1()
 
 	systemMessage := ""
 	isLookAtRoom := false
@@ -35,27 +35,26 @@ func main() {
 		system.AddOpenDoorCommands(connectingRooms, &ableCommands)
 		system.AddDefaultCommands(&ableCommands)
 
-		ableCommandsString := strings.Join(ableCommands, ", ")
 		myItemsString := strings.Join(char.Items, ", ")
 
 		switch isLookAtRoom {
 		case true:
-			maps.LookAtRoomPrint(systemMessage, stage1, myItemsString, ableCommandsString, connectingRooms)
+			maps.LookAtRoomPrint(systemMessage, stage1, myItemsString, ableCommands, connectingRooms)
 			fmt.Scanln(&firstCommand, &secondCommand, &thirdCommand)
 		default:
-			maps.Print(systemMessage, stage1, myItemsString, ableCommandsString, connectingRooms)
+			maps.Print(systemMessage, stage1, myItemsString, ableCommands, connectingRooms)
 			fmt.Scanln(&firstCommand, &secondCommand, &thirdCommand)
 		}
 
 		switch secondCommand {
 		case "사용":
-			if maps.UseItem(firstCommand, ableCommandsString, &char.Items, connectingRooms, thirdCommand) {
+			if maps.UseItem(firstCommand, ableCommands, &char.Items, connectingRooms, thirdCommand) {
 				systemMessage = "아이템을 사용했습니다."
 				isLookAtRoom = false
 				continue
 			}
 		case "열기":
-			if maps.OpenDoor(firstCommand, ableCommandsString, connectingRooms, &char.Items) {
+			if maps.OpenDoor(firstCommand, ableCommands, connectingRooms, &char.Items) {
 				systemMessage = "문을 열었습니다."
 				isLookAtRoom = false
 				continue
@@ -82,7 +81,7 @@ func main() {
 		default:
 			switch firstCommand[0] {
 			case "동"[0], "서"[0], "남"[0], "북"[0]:
-				if maps.Move(firstCommand, ableCommandsString, &stage1) {
+				if maps.Move(firstCommand, ableCommands, &stage1) {
 					isLookAtRoom = false
 					systemMessage = ""
 					continue
