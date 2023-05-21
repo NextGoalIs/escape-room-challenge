@@ -7,7 +7,6 @@ import (
 	"escape-room-challenge/unit"
 	"escape-room-challenge/utils"
 	"os"
-	"strings"
 )
 
 func main() {
@@ -23,7 +22,6 @@ func main() {
 	for {
 		var ableCommands []string
 		reader := bufio.NewReader(os.Stdin)
-		var input string
 
 		if stage.GetThisLocation().IsGoal {
 			utils.PrintWIN()
@@ -32,18 +30,8 @@ func main() {
 
 		system.AddCommands(stage, &ableCommands, char)
 
-		switch isLookAtRoom {
-		case true:
-			maps.LookAtRoomPrint(systemMessage, stage, ableCommands)
-			input, _ = reader.ReadString('\n')
-			input = strings.TrimSpace(input)
-			// fmt.Scanln(&firstCommand, &secondCommand, &thirdCommand)
-		default:
-			maps.Print(systemMessage, stage, ableCommands)
-			input, _ = reader.ReadString('\n')
-			input = strings.TrimSpace(input)
-			// fmt.Scanln(&firstCommand, &secondCommand, &thirdCommand)
-		}
+		system.Print(isLookAtRoom, &systemMessage, stage, ableCommands)
+		input := system.Scan(reader)
 
 		//나머지 처리 미완
 		// system.AddLookAtMessage(firstCommand)

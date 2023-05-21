@@ -13,6 +13,18 @@ func (m MapStruct) GetThisLocation() *rooms.Room {
 	return &m.nowMap[m.nowX][m.nowY]
 }
 
+func (m *MapStruct) GetNowMap() [][]rooms.Room {
+	return m.nowMap
+}
+
+func (m MapStruct) GetX() int {
+	return m.nowX
+}
+
+func (m MapStruct) GetY() int {
+	return m.nowY
+}
+
 func (m *MapStruct) AddX(number int) {
 	m.nowX += number
 }
