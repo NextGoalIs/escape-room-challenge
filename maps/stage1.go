@@ -5,7 +5,7 @@ import (
 	"escape-room-challenge/types"
 )
 
-func GetStage1() mapStruct {
+func GetStage1() MapStruct {
 	var defaultMap = setRooms(6, 8)
 	defaultMap[3][0] = rooms.NewRoom(types.NoDoorType, types.Hammer, false, types.NoUnit)    // 망치
 	defaultMap[1][1] = rooms.NewRoom(types.NoDoorType, types.NoItem, false, types.Character) // 스타트지점
@@ -26,5 +26,5 @@ func GetStage1() mapStruct {
 
 	defaultMap[1][1].SetMyCharacter()
 
-	return mapStruct{nowX: 1, nowY: 1, nowMap: defaultMap}
+	return MapStruct{nowX: 1, nowY: 1, nowMap: defaultMap}
 }

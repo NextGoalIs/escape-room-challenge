@@ -5,7 +5,7 @@ import (
 	"regexp"
 )
 
-func Move(selectedCommand string, ableCommands []string, stage *mapStruct) bool {
+func Move(selectedCommand string, ableCommands []string, stage *MapStruct) bool {
 	reg, _ := regexp.Compile("^동.*")
 
 	isEast := reg.MatchString(selectedCommand)

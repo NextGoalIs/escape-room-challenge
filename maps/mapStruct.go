@@ -2,26 +2,26 @@ package maps
 
 import "escape-room-challenge/rooms"
 
-type mapStruct struct {
+type MapStruct struct {
 	nowX int
 	nowY int
 
 	nowMap [][]rooms.Room
 }
 
-func (m mapStruct) GetThisLocation() *rooms.Room {
+func (m MapStruct) GetThisLocation() *rooms.Room {
 	return &m.nowMap[m.nowX][m.nowY]
 }
 
-func (m *mapStruct) AddX(number int) {
+func (m *MapStruct) AddX(number int) {
 	m.nowX += number
 }
 
-func (m *mapStruct) AddY(number int) {
+func (m *MapStruct) AddY(number int) {
 	m.nowY += number
 }
 
-func (m mapStruct) GetConnectingRooms() [4]*rooms.Room {
+func (m MapStruct) GetConnectingRooms() [4]*rooms.Room {
 	var north, east, south, west *rooms.Room
 
 	if (m.nowY+1 < len(m.nowMap[m.nowX])) && m.nowMap[m.nowX][m.nowY+1].Icon != "" {

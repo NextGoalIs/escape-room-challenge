@@ -5,7 +5,7 @@ import (
 	"escape-room-challenge/types"
 )
 
-func GetStage2() mapStruct {
+func GetStage2() MapStruct {
 	var m = setRooms(10, 10)
 
 	m[7][0] = rooms.NewRoom(types.LockedType, types.NoItem, true, types.NoUnit) // 끝문
@@ -43,5 +43,5 @@ func GetStage2() mapStruct {
 
 	m[0][9].SetMyCharacter()
 
-	return mapStruct{nowX: 0, nowY: 9, nowMap: m}
+	return MapStruct{nowX: 0, nowY: 9, nowMap: m}
 }
