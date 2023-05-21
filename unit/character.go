@@ -24,3 +24,12 @@ func (c *Character) SetName() {
 		}
 	}
 }
+
+func (c *Character) LookAt(commnad string) bool {
+	switch commnad {
+	case "방":
+		return true
+	default:
+		return false
+	}
+}

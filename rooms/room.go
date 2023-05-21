@@ -35,10 +35,10 @@ func NewRoom(doorType types.DoorTypes, itemType types.UsingItemTypes, isGoal boo
 	switch itemType {
 	case types.NoItem:
 	case types.Key:
-		room.Icon = string(types.KeyIcon)
+		// room.Icon = string(types.KeyIcon)
 		room.ItemType = itemType
 	case types.Hammer:
-		room.Icon = string(types.HammerIcon)
+		// room.Icon = string(types.HammerIcon)
 		room.ItemType = itemType
 	default:
 	}

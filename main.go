@@ -3,7 +3,6 @@ package main
 import (
 	"escape-room-challenge/maps"
 	"escape-room-challenge/system"
-	"escape-room-challenge/types"
 	"escape-room-challenge/unit"
 	"escape-room-challenge/utils"
 	"fmt"
@@ -19,19 +18,15 @@ func main() {
 
 	stage1.GetThisLocation().SetMyCharacter()
 	systemMessage := ""
+	isLookAtRoom := false
 
 	for {
 		var ableCommands []string
-		var inputItemCommand, inputCommand string
+		var firstCommand, secondCommand string
 
 		if stage1.GetThisLocation().IsGoal {
 			utils.PrintWIN()
 			break
-		}
-
-		//무조건 먹게 하지 말고 줍게 하기...다음에...
-		if stage1.GetThisLocation().ItemType != types.NoItem {
-			stage1.GetThisLocation().PickUpItem(&systemMessage, &char)
 		}
 
 		connectingRooms := stage1.GetConnectingRooms()
@@ -43,30 +38,55 @@ func main() {
 		ableCommandsString := strings.Join(ableCommands, ", ")
 		myItemsString := strings.Join(char.Items, ", ")
 
-		maps.Print(systemMessage, stage1, myItemsString, ableCommandsString, connectingRooms)
-		fmt.Scanln(&inputItemCommand, &inputCommand)
+		switch isLookAtRoom {
+		case true:
+			maps.LookAtRoomPrint(systemMessage, stage1, myItemsString, ableCommandsString, connectingRooms)
+			fmt.Scanln(&firstCommand, &secondCommand)
+		default:
+			maps.Print(systemMessage, stage1, myItemsString, ableCommandsString, connectingRooms)
+			fmt.Scanln(&firstCommand, &secondCommand)
+		}
 
-		switch inputCommand {
+		switch secondCommand {
 		case "사용":
-			if maps.UseItem(inputItemCommand, ableCommandsString, &char.Items, connectingRooms) {
+			if maps.UseItem(firstCommand, ableCommandsString, &char.Items, connectingRooms) {
 				systemMessage = "아이템을 사용했습니다."
+				isLookAtRoom = false
 				continue
 			}
 		case "열기":
-			if maps.OpenDoor(inputItemCommand, ableCommandsString, connectingRooms, &char.Items) {
+			if maps.OpenDoor(firstCommand, ableCommandsString, connectingRooms, &char.Items) {
 				systemMessage = "문을 열었습니다."
+				isLookAtRoom = false
 				continue
 			}
+		case "보기":
+			if char.LookAt(firstCommand) {
+				isLookAtRoom = true
+				systemMessage = ""
+				continue
+			}
+			systemMessage = "할 수 없는 행동이거나 행동 조건을 충족시키지 못했습니다."
+			continue
+		case "줍기":
+			if stage1.GetThisLocation().PickUpItem(&systemMessage, &char) {
+				isLookAtRoom = false
+				continue
+			}
+			systemMessage = "할 수 없는 행동이거나 행동 조건을 충족시키지 못했습니다."
+			continue
 		default:
-			switch inputItemCommand[0] {
+			switch firstCommand[0] {
 			case "동"[0], "서"[0], "남"[0], "북"[0]:
-				if maps.Move(inputItemCommand, ableCommandsString, &stage1) {
+				if maps.Move(firstCommand, ableCommandsString, &stage1) {
+					isLookAtRoom = false
 					systemMessage = ""
 					continue
 				}
 
 				fallthrough
 			default:
+				isLookAtRoom = false
 				systemMessage = "할 수 없는 행동이거나 행동 조건을 충족시키지 못했습니다."
 				continue
 			}
