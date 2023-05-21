@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func UseItem(selectedCommand string, ableCommandsString string, myItems *[]string, connectingRooms [4]*rooms.Room) bool {
+func UseItem(selectedCommand string, ableCommandsString string, myItems *[]string, connectingRooms [4]*rooms.Room, thirdCommand string) bool {
 	if !strings.Contains(ableCommandsString, selectedCommand) {
 		return false
 	}
@@ -17,14 +17,14 @@ func UseItem(selectedCommand string, ableCommandsString string, myItems *[]strin
 		}
 
 		for _, room := range connectingRooms {
-			isUsed := useHammer(item, room, myItems)
+			isUsed := useHammer(item, room, myItems, thirdCommand)
 			if isUsed {
 				return true
 			}
 		}
 
 		for _, room := range connectingRooms {
-			isUsed := useKey(item, room, myItems)
+			isUsed := useKey(item, room, myItems, thirdCommand)
 			if isUsed {
 				return true
 			}
@@ -35,12 +35,12 @@ func UseItem(selectedCommand string, ableCommandsString string, myItems *[]strin
 	return false
 }
 
-func useHammer(item string, room *rooms.Room, myItems *[]string) bool {
+func useHammer(item string, room *rooms.Room, myItems *[]string, thirdCommand string) bool {
 	if item != "망치" {
 		return false
 	}
 
-	if room.DoorType != types.GlassType {
+	if room.DoorType != types.GlassType && thirdCommand != "유리문" {
 		return false
 	}
 
@@ -50,12 +50,12 @@ func useHammer(item string, room *rooms.Room, myItems *[]string) bool {
 	return true
 }
 
-func useKey(item string, room *rooms.Room, myItems *[]string) bool {
+func useKey(item string, room *rooms.Room, myItems *[]string, thirdCommand string) bool {
 	if item != "열쇠" {
 		return false
 	}
 
-	if room.DoorType != types.LockedType {
+	if room.DoorType != types.LockedType && thirdCommand != "잠긴문" {
 		return false
 	}
 

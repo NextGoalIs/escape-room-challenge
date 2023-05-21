@@ -36,6 +36,10 @@ func LookAtRoomPrint(systemMessage string, stage mapStruct, myItemsString string
 	firstThing := setIcon(stage.GetThisLocation().ItemType)
 	// secondThing := setIcon(stage.)
 
+	if firstThing == "" {
+		systemMessage = "이 방엔 아무것도 없는 듯 하다..."
+	}
+
 	utils.ClearConsoleWindows()
 	fmt.Println(systemMessage)
 	println(utils.GetStringCenter(string(firstThing)+" "+north.Icon+" ", PADDING-len(west.Icon)))

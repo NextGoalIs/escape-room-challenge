@@ -21,7 +21,7 @@ func main() {
 
 	for {
 		var ableCommands []string
-		var firstCommand, secondCommand string
+		var firstCommand, secondCommand, thirdCommand string
 
 		if stage1.GetThisLocation().IsGoal {
 			utils.PrintWIN()
@@ -33,6 +33,7 @@ func main() {
 		system.AddMoveCommands(connectingRooms, &ableCommands)
 		system.AddUseItemCommands(char.Items, &ableCommands)
 		system.AddOpenDoorCommands(connectingRooms, &ableCommands)
+		system.AddDefaultCommands(&ableCommands)
 
 		ableCommandsString := strings.Join(ableCommands, ", ")
 		myItemsString := strings.Join(char.Items, ", ")
@@ -40,15 +41,15 @@ func main() {
 		switch isLookAtRoom {
 		case true:
 			maps.LookAtRoomPrint(systemMessage, stage1, myItemsString, ableCommandsString, connectingRooms)
-			fmt.Scanln(&firstCommand, &secondCommand)
+			fmt.Scanln(&firstCommand, &secondCommand, &thirdCommand)
 		default:
 			maps.Print(systemMessage, stage1, myItemsString, ableCommandsString, connectingRooms)
-			fmt.Scanln(&firstCommand, &secondCommand)
+			fmt.Scanln(&firstCommand, &secondCommand, &thirdCommand)
 		}
 
 		switch secondCommand {
 		case "사용":
-			if maps.UseItem(firstCommand, ableCommandsString, &char.Items, connectingRooms) {
+			if maps.UseItem(firstCommand, ableCommandsString, &char.Items, connectingRooms, thirdCommand) {
 				systemMessage = "아이템을 사용했습니다."
 				isLookAtRoom = false
 				continue
@@ -60,10 +61,14 @@ func main() {
 				continue
 			}
 		case "보기":
-			if char.LookAt(firstCommand) {
+			switch firstCommand {
+			case "방":
 				isLookAtRoom = true
 				systemMessage = ""
 				continue
+			default:
+				//나머지 처리 미완
+				// system.AddLookAtMessage(firstCommand)
 			}
 			systemMessage = "할 수 없는 행동이거나 행동 조건을 충족시키지 못했습니다."
 			continue
