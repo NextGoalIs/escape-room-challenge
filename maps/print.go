@@ -35,7 +35,10 @@ func LookAtRoomPrint(systemMessage string, stage mapStruct, myItemsString string
 	south := connectingRooms[2]
 
 	firstThing := setIcon(stage.GetThisLocation().ItemType)
+
 	// secondThing := setIcon(stage.)
+
+	systemMessage = setSystemMessage(stage.GetThisLocation().ItemType)
 
 	if firstThing == "" {
 		systemMessage = "이 방엔 아무것도 없는 듯 하다..."
@@ -67,5 +70,22 @@ func setIcon(itemType types.UsingItemTypes) types.UsingItemIcons {
 		return types.WoodSwordIcon
 	default:
 		return types.NoItemIcon
+	}
+}
+
+func setSystemMessage(itemType types.UsingItemTypes) string {
+	switch itemType {
+	case types.Chest:
+		return "방에 상자가 있다."
+	case types.Hammer:
+		return "방에 망치가 있다."
+	case types.Key:
+		return "방에 열쇠가 있다."
+	case types.Potion:
+		return "방에 포션이 있다."
+	case types.WoodSword:
+		return "방에 목검이 있다."
+	default:
+		return ""
 	}
 }
