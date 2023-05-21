@@ -9,10 +9,10 @@ import (
 
 func main() {
 
-	char := unit.Character{}
+	char := unit.NewCharacter()
 	char.SetName()
 
-	stage := maps.GetStage1()
+	stage := maps.GetStage2()
 
 	systemMessage := ""
 	isLookAtRoom := false

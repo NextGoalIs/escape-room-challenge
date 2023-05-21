@@ -19,7 +19,7 @@ func (room *Room) PickUpItem(systemMessage *string, char *unit.Character) bool {
 		room.ItemType = 0
 		char.Items = append(char.Items, "망치")
 		return true
-	case types.WoodSword:
+	case types.DroppedWoodSword:
 		*systemMessage = "목검을 획득했다."
 		room.ItemType = 0
 		char.Items = append(char.Items, "목검")

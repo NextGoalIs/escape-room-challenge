@@ -9,14 +9,14 @@ const (
 	Hammer
 	Chest
 	Potion
-	WoodSword
+	DroppedWoodSword
 )
 
 const (
-	NoItemIcon    UsingItemIcons = ""
-	KeyIcon       UsingItemIcons = "🔑"
-	HammerIcon    UsingItemIcons = "🔨"
-	ChestIcon     UsingItemIcons = "🎁"
-	PotionIcon    UsingItemIcons = "🧪"
-	WoodSwordIcon UsingItemIcons = "🔪"
+	NoItemIcon           UsingItemIcons = ""
+	KeyIcon              UsingItemIcons = "🔑"
+	HammerIcon           UsingItemIcons = "🔨"
+	ChestIcon            UsingItemIcons = "🎁"
+	PotionIcon           UsingItemIcons = "🧪"
+	DroppedWoodSwordIcon UsingItemIcons = "🔪"
 )

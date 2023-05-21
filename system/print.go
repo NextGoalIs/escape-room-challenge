@@ -62,8 +62,8 @@ func setIcon(itemType types.UsingItemTypes) types.UsingItemIcons {
 		return types.ChestIcon
 	case types.Potion:
 		return types.PotionIcon
-	case types.WoodSword:
-		return types.WoodSwordIcon
+	case types.DroppedWoodSword:
+		return types.DroppedWoodSwordIcon
 	default:
 		return types.NoItemIcon
 	}
@@ -79,7 +79,7 @@ func setSystemMessage(itemType types.UsingItemTypes) string {
 		return "방에 열쇠가 있다."
 	case types.Potion:
 		return "방에 포션이 있다."
-	case types.WoodSword:
+	case types.DroppedWoodSword:
 		return "방에 목검이 있다."
 	default:
 		return ""
