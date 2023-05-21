@@ -4,6 +4,7 @@ import (
 	"escape-room-challenge/types"
 	"escape-room-challenge/utils"
 	"fmt"
+	"strings"
 )
 
 type Character struct {
@@ -51,5 +52,14 @@ func (c *Character) SetName() {
 }
 
 func (c *Character) ShowStatus() {
-
+	utils.ClearConsoleWindows()
+	fmt.Println("캐릭터 이름 : ", c.Name)
+	fmt.Println("장비한 아이템 : ", "미완성 ㅎㅎ;")
+	fmt.Println("체력 : ", c.health)
+	fmt.Println("공격력 : ", c.attackDamage)
+	fmt.Println("방어력 : ", c.defence)
+	fmt.Println("소유한 아이템 : ", strings.Join(c.Items, ", "))
+	fmt.Println()
+	fmt.Println("돌아가려면 Enter키를 눌러주세요")
+	fmt.Scanln()
 }

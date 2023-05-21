@@ -62,6 +62,10 @@ func Act(input string, char *unit.Character, systemMessage *string, isLookAtRoom
 		return
 	default:
 		switch firstCommand {
+		case "상태":
+			char.ShowStatus()
+			*systemMessage = ""
+			return
 		case "동", "서", "남", "북":
 			if maps.Move(firstCommand, stage) {
 				*isLookAtRoom = false
