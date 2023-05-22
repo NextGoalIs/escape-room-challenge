@@ -6,7 +6,9 @@ import (
 	"strings"
 )
 
-func Act(input string, char *unit.Character, systemMessage *string, isLookAtRoom *bool, stage *maps.MapStruct) {
+func Act(char *unit.Character, systemMessage *string, isLookAtRoom *bool, stage *maps.MapStruct) {
+
+	input := Scan()
 
 	connectingRooms := stage.GetConnectingRooms()
 
