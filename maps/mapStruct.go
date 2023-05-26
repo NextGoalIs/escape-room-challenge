@@ -9,7 +9,16 @@ type MapStruct struct {
 	nowX int
 	nowY int
 
-	nowMap [][]rooms.Room
+	nowMap         [][]rooms.Room
+	isViewedDetail bool
+}
+
+func (m MapStruct) GetIsViewedDetail() bool {
+	return m.isViewedDetail
+}
+
+func (m *MapStruct) SetIsViewedDetail(value bool) {
+	m.isViewedDetail = value
 }
 
 func (m MapStruct) GetThisLocation() *rooms.Room {

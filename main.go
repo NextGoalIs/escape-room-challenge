@@ -15,7 +15,6 @@ func main() {
 	stage := maps.GetStage2()
 
 	systemMessage := ""
-	isLookAtRoom := false
 
 	for {
 		if stage.GetThisLocation().IsGoal {
@@ -23,11 +22,8 @@ func main() {
 			break
 		}
 
-		system.Print(isLookAtRoom, &systemMessage, stage, char)
-
-		//나머지 처리 미완
-		// system.AddLookAtMessage(firstCommand)
-		system.Act(&char, &systemMessage, &isLookAtRoom, &stage)
+		system.Print(&systemMessage, stage, char)
+		system.Act(&char, &systemMessage, &stage)
 	}
 
 }

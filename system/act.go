@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func Act(char *unit.Character, systemMessage *string, isLookAtRoom *bool, stage *maps.MapStruct) {
+func Act(char *unit.Character, systemMessage *string, stage *maps.MapStruct) {
 
 	input := Scan()
 
@@ -35,19 +35,19 @@ func Act(char *unit.Character, systemMessage *string, isLookAtRoom *bool, stage 
 	case "사용":
 		if maps.UseItem(firstCommand, &char.Items, connectingRooms, thirdCommand) {
 			*systemMessage = "아이템을 사용했습니다."
-			*isLookAtRoom = false
+			stage.SetIsViewedDetail(false)
 			return
 		}
 	case "열기":
 		if maps.OpenDoor(firstCommand, connectingRooms, &char.Items) {
 			*systemMessage = "문을 열었습니다."
-			*isLookAtRoom = false
+			stage.SetIsViewedDetail(false)
 			return
 		}
 	case "보기":
 		switch firstCommand {
 		case "방":
-			*isLookAtRoom = true
+			stage.SetIsViewedDetail(true)
 			*systemMessage = ""
 			return
 		default:
@@ -57,7 +57,7 @@ func Act(char *unit.Character, systemMessage *string, isLookAtRoom *bool, stage 
 		return
 	case "줍기":
 		if stage.GetThisLocation().PickUpItem(systemMessage, char) {
-			*isLookAtRoom = false
+			stage.SetIsViewedDetail(false)
 			return
 		}
 		*systemMessage = "할 수 없는 행동이거나 행동 조건을 충족시키지 못했습니다."
@@ -70,16 +70,16 @@ func Act(char *unit.Character, systemMessage *string, isLookAtRoom *bool, stage 
 			return
 		case "동", "서", "남", "북":
 			if maps.Move(firstCommand, stage) {
-				*isLookAtRoom = false
+				stage.SetIsViewedDetail(false)
 				*systemMessage = ""
 				return
 			}
 
-			*isLookAtRoom = false
+			stage.SetIsViewedDetail(false)
 			*systemMessage = "할 수 없는 행동이거나 행동 조건을 충족시키지 못했습니다."
 			return
 		default:
-			*isLookAtRoom = false
+			stage.SetIsViewedDetail(false)
 			*systemMessage = "할 수 없는 행동이거나 행동 조건을 충족시키지 못했습니다."
 			return
 		}

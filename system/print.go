@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-func Print(isLookAtRoom bool, systemMessage *string, stage maps.MapStruct, char unit.Character) {
+func Print(systemMessage *string, stage maps.MapStruct, char unit.Character) {
 
 	var ableCommands []string
 	AddCommands(stage, &ableCommands, char)
@@ -22,7 +22,7 @@ func Print(isLookAtRoom bool, systemMessage *string, stage maps.MapStruct, char 
 	east := connectingRooms[0]
 	south := connectingRooms[2]
 
-	switch isLookAtRoom {
+	switch stage.GetIsViewedDetail() {
 	case true:
 		firstThing := setIcon(stage.GetThisLocation().ItemType)
 
