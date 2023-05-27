@@ -35,6 +35,8 @@ func NewCharacter() Character {
 	c.attackDamage = 3
 	c.defence = 0
 
+	c.SetName()
+
 	return c
 }
 
