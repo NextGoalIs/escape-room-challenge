@@ -11,9 +11,9 @@ type Character struct {
 	Name string
 	Icon string
 
-	health       int
-	attackDamage int
-	defence      int
+	Health       int
+	AttackDamage int
+	Defence      int
 
 	Items        []string
 	EquipedItems EqpItems
@@ -31,9 +31,9 @@ func NewCharacter() Character {
 	c := Character{}
 	c.Icon = string(types.MyCharacterIcon)
 
-	c.health = 50
-	c.attackDamage = 3
-	c.defence = 0
+	c.Health = 50
+	c.AttackDamage = 3
+	c.Defence = 0
 
 	c.SetName()
 
@@ -53,13 +53,21 @@ func (c *Character) SetName() {
 	}
 }
 
+func (c Character) AttackTo(enemy *Enemy) {
+	damage := enemy.Defence - c.AttackDamage
+	if damage >= 0 {
+		return
+	}
+	enemy.Health = enemy.Health + damage
+}
+
 func (c *Character) ShowStatus() {
 	utils.ClearConsoleWindows()
 	fmt.Println("캐릭터 이름 : ", c.Name)
 	fmt.Println("장비한 아이템 : ", "미완성 ㅎㅎ;")
-	fmt.Println("체력 : ", c.health)
-	fmt.Println("공격력 : ", c.attackDamage)
-	fmt.Println("방어력 : ", c.defence)
+	fmt.Println("체력 : ", c.Health)
+	fmt.Println("공격력 : ", c.AttackDamage)
+	fmt.Println("방어력 : ", c.Defence)
 	fmt.Println("소유한 아이템 : ", strings.Join(c.Items, ", "))
 	fmt.Println()
 	fmt.Println("돌아가려면 Enter키를 눌러주세요")

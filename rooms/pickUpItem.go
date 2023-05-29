@@ -30,9 +30,9 @@ func (room *Room) PickUpItem(systemMessage *string, char *unit.Character) bool {
 		char.Items = append(char.Items, "상자")
 		return true
 	case types.Potion:
-		*systemMessage = "포션을 획득했다."
+		*systemMessage = "회복약을 획득했다."
 		room.ItemType = 0
-		char.Items = append(char.Items, "포션")
+		char.Items = append(char.Items, "회복약")
 		return true
 	default:
 		return false

@@ -1,6 +1,6 @@
 package maps
 
-func removeItem(myItems *[]string, item string) {
+func RemoveItem(myItems *[]string, item string) {
 	if len(*myItems) == 1 && (*myItems)[0] == item {
 		*myItems = []string{}
 	} else {

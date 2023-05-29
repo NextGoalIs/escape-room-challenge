@@ -1,8 +1,7 @@
 package unit
 
-type Deer struct {
-	Name string
+func NewDear() Enemy {
+	e := Enemy{Name: "사슴", Health: 100, AttackDamage: 10, Defence: 5}
 
-	AttackDamage int
-	Defence      int
+	return e
 }

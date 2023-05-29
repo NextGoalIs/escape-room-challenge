@@ -29,7 +29,7 @@ func OpenDoor(inputItem string, connectingRooms [4]*rooms.Room, myItems *[]strin
 			}
 
 			room.SetEmpty()
-			removeItem(myItems, "망치")
+			RemoveItem(myItems, "망치")
 			break
 		}
 	case "잠긴문":
@@ -43,7 +43,7 @@ func OpenDoor(inputItem string, connectingRooms [4]*rooms.Room, myItems *[]strin
 			}
 
 			room.SetWoodDoor()
-			removeItem(myItems, "열쇠")
+			RemoveItem(myItems, "열쇠")
 			break
 		}
 	default:

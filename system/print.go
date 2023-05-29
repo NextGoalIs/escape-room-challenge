@@ -87,7 +87,7 @@ func setSystemItemMessage(itemType types.UsingItemTypes) string {
 	case types.Key:
 		return "방에 열쇠가 있다."
 	case types.Potion:
-		return "방에 포션이 있다."
+		return "방에 회복약이 있다."
 	case types.DroppedWoodSword:
 		return "방에 목검이 있다."
 	default:

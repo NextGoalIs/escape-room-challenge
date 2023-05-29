@@ -47,7 +47,7 @@ func useHammer(item string, room *rooms.Room, myItems *[]string, thirdCommand st
 
 	room.SetEmpty()
 
-	removeItem(myItems, item)
+	RemoveItem(myItems, item)
 	return true
 }
 
@@ -66,6 +66,6 @@ func useKey(item string, room *rooms.Room, myItems *[]string, thirdCommand strin
 
 	room.SetWoodDoor()
 
-	removeItem(myItems, item)
+	RemoveItem(myItems, item)
 	return true
 }
