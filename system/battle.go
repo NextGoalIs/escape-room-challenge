@@ -11,8 +11,8 @@ import (
 )
 
 func Battle(c *unit.Character, e *unit.Enemy) {
-	utils.ClearConsoleWindows()
 	for {
+		utils.ClearConsoleWindows()
 		if c.Health <= 0 {
 			return
 		}

@@ -1,5 +1,10 @@
 package unit
 
+import (
+	"fmt"
+	"math"
+)
+
 type Enemy struct {
 	Name string
 
@@ -14,8 +19,8 @@ func (e Enemy) AttackTo(c *Character) {
 		return
 	}
 	c.Health = c.Health + damage
+	fmt.Println(math.Abs(float64(damage)), "만큼의 데미지를 입었습니다.")
 }
-
 func (e *Enemy) setHealth(h int) {
 	e.Health = h
 }

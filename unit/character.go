@@ -4,6 +4,7 @@ import (
 	"escape-room-challenge/types"
 	"escape-room-challenge/utils"
 	"fmt"
+	"math"
 	"strings"
 )
 
@@ -44,7 +45,6 @@ func (c Character) getCalcAttackDamage() int {
 // func (c Character) getCalcAttackDamageDetail() string {
 // 	content := string(c.getCalcAttackDamage())
 
-
 // 	return content
 // }
 
@@ -67,6 +67,7 @@ func (c Character) AttackTo(enemy *Enemy) {
 		return
 	}
 	enemy.Health = enemy.Health + damage
+	fmt.Println(enemy.Name, "에게 ", math.Abs(float64(damage)), "만큼의 데미지를 입혔습니다.")
 }
 
 func (c *Character) ShowStatus() {
@@ -74,7 +75,7 @@ func (c *Character) ShowStatus() {
 	fmt.Println("캐릭터 이름 : ", c.Name)
 	fmt.Println("장비한 아이템 : ", "미완성 ㅎㅎ;")
 	fmt.Println("체력 : ", c.Health)
-	fmt.Println("공격력 : ", ) //TODO getCalcAttackDamageDetail로 변경하기
+	fmt.Println("공격력 : ") //TODO getCalcAttackDamageDetail로 변경하기
 	fmt.Println("방어력 : ", c.Defence)
 	fmt.Println("소유한 아이템 : ", strings.Join(c.Items, ", "))
 	fmt.Println()
