@@ -19,9 +19,11 @@ func EqpItem(firstCommand string, char *unit.Character) bool {
 		switch types.NoWeaponItem {
 		case int(char.LeftHand):
 			char.LeftHand = weaponType
+			RemoveItem(&char.Items, name)
 			return true
 		case int(char.RightHand):
 			char.RightHand = weaponType
+			RemoveItem(&char.Items, name)
 			return true
 		default:
 			return false
@@ -36,6 +38,7 @@ func EqpItem(firstCommand string, char *unit.Character) bool {
 		switch types.NoShoesItem {
 		case char.Shoes:
 			char.Shoes = shoesItem
+			RemoveItem(&char.Items, name)
 			return true
 		default:
 			return false
@@ -50,6 +53,7 @@ func EqpItem(firstCommand string, char *unit.Character) bool {
 		switch types.NoShirtItem {
 		case char.Shirt:
 			char.Shirt = shirtItem
+			RemoveItem(&char.Items, name)
 			return true
 		default:
 			return false
@@ -64,6 +68,7 @@ func EqpItem(firstCommand string, char *unit.Character) bool {
 		switch types.NoPantsItem {
 		case char.Pants:
 			char.Pants = pantsItem
+			RemoveItem(&char.Items, name)
 			return true
 		default:
 			return false

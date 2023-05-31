@@ -5,6 +5,7 @@ import (
 	"escape-room-challenge/utils"
 	"fmt"
 	"math"
+	"reflect"
 	"strings"
 )
 
@@ -81,12 +82,32 @@ func (c Character) AttackTo(enemy *Enemy) {
 func (c *Character) ShowStatus() {
 	utils.ClearConsoleWindows()
 	fmt.Println("캐릭터 이름 : ", c.Name)
-	fmt.Println("장비한 아이템 : ", "미완성 ㅎㅎ;")
 	fmt.Println("체력 : ", c.Health)
 	fmt.Println("공격력 : ", c.getCalcAttackDamage()) //TODO getCalcAttackDamageDetail로 변경하기
 	fmt.Println("방어력 : ", c.GetCalcDefence())
 	fmt.Println("소유한 아이템 : ", strings.Join(c.Items, ", "))
 	fmt.Println()
+	c.ShowEqpItem()
 	fmt.Println("돌아가려면 Enter키를 눌러주세요")
 	fmt.Scanln()
+}
+
+func (c Character) ShowEqpItem() {
+	fmt.Println("┌장비한 아이템")
+	fmt.Println("│Shirt : ", types.ShirtNameMap[c.Shirt])
+	fmt.Println("│Pants : ", types.PantsNameMap[c.Pants])
+	fmt.Println("│Shoes : ", types.ShoesNameMap[c.Shoes])
+	fmt.Println("│LeftHand : ", types.WeaponNameMap[c.LeftHand])
+	fmt.Println("└RightHand : ", types.WeaponNameMap[c.RightHand])
+	fmt.Println()
+}
+
+func (c *Character) showEqpItems_deprecated() {
+	utils.ClearConsoleWindows()
+
+	eqpItems := &c.EqpItems
+	itemValues := reflect.ValueOf(eqpItems).Elem()
+	for i := 0; i < itemValues.NumField(); i++ {
+		fmt.Printf("%s: %v\n", itemValues.Type().Field(i).Name, itemValues.Field(i).Interface())
+	}
 }
