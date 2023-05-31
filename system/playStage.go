@@ -8,30 +8,28 @@ import (
 
 func PlayStage1(char unit.Character) {
 	stage := maps.GetStage1()
-
-	systemMessage := ""
+	message := Message{}
 
 	for {
 		if stage.GetThisLocation().IsGoal {
 			utils.PrintWIN()
 			break
 		}
-		Print(&systemMessage, stage, char)
-		Act(&char, &systemMessage, &stage)
+		Print(&message, stage, char)
+		Act(&char, &message, &stage)
 	}
 }
 
 func PlayStage2(char unit.Character) {
 	stage := maps.GetStage2()
-
-	systemMessage := ""
+	message := Message{}
 
 	for {
 		if stage.GetThisLocation().IsGoal {
 			utils.PrintWIN()
 			break
 		}
-		Print(&systemMessage, stage, char)
-		Act(&char, &systemMessage, &stage)
+		Print(&message, stage, char)
+		Act(&char, &message, &stage)
 	}
 }

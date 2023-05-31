@@ -2,11 +2,12 @@ package system
 
 import (
 	"escape-room-challenge/maps"
+	"escape-room-challenge/types"
 	"escape-room-challenge/unit"
 	"strings"
 )
 
-func Act(char *unit.Character, systemMessage *string, stage *maps.MapStruct) {
+func Act(char *unit.Character, message *Message, stage *maps.MapStruct) {
 
 	input := Scan()
 
@@ -32,55 +33,72 @@ func Act(char *unit.Character, systemMessage *string, stage *maps.MapStruct) {
 	}
 
 	switch secondCommand {
+	case "전투":
+		if !stage.GetIsViewedDetail() {
+			message.SetCannotAct()
+			return
+		}
+
+		if stage.GetThisLocation().Unit == types.NoUnit {
+			message.SetCannotAct()
+			return
+		}
+
+		// Battle(char, e)
+
 	case "사용":
 		if maps.UseItem(firstCommand, &char.Items, connectingRooms, thirdCommand) {
-			*systemMessage = "아이템을 사용했습니다."
+			message.SetUseItem()
 			stage.SetIsViewedDetail(false)
 			return
 		}
+
+		message.SetCannotAct()
 	case "열기":
 		if maps.OpenDoor(firstCommand, connectingRooms, &char.Items) {
-			*systemMessage = "문을 열었습니다."
+			message.SetOpenDoor()
 			stage.SetIsViewedDetail(false)
 			return
 		}
+
+		message.SetCannotAct()
 	case "보기":
 		switch firstCommand {
 		case "방":
 			stage.SetIsViewedDetail(true)
-			*systemMessage = ""
+			message.SetEmptyString()
 			return
 		default:
-
+			message.SetCannotAct()
 		}
-		*systemMessage = "할 수 없는 행동이거나 행동 조건을 충족시키지 못했습니다."
+		message.SetCannotAct()
 		return
 	case "줍기":
-		if stage.GetThisLocation().PickUpItem(systemMessage, char) {
+		if stage.GetThisLocation().PickUpItem(message, char) {
 			stage.SetIsViewedDetail(false)
 			return
 		}
-		*systemMessage = "할 수 없는 행동이거나 행동 조건을 충족시키지 못했습니다."
+		message.SetCannotAct()
 		return
 	default:
 		switch firstCommand {
 		case "상태":
 			char.ShowStatus()
-			*systemMessage = ""
+			message.SetEmptyString()
 			return
 		case "동", "서", "남", "북":
 			if maps.Move(firstCommand, stage) {
 				stage.SetIsViewedDetail(false)
-				*systemMessage = ""
+				message.SetEmptyString()
 				return
 			}
 
 			stage.SetIsViewedDetail(false)
-			*systemMessage = "할 수 없는 행동이거나 행동 조건을 충족시키지 못했습니다."
+			message.SetCannotAct()
 			return
 		default:
 			stage.SetIsViewedDetail(false)
-			*systemMessage = "할 수 없는 행동이거나 행동 조건을 충족시키지 못했습니다."
+			message.SetCannotAct()
 			return
 		}
 	}

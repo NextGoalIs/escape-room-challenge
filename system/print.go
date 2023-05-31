@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-func Print(systemMessage *string, stage maps.MapStruct, char unit.Character) {
+func Print(message *Message, stage maps.MapStruct, char unit.Character) {
 
 	var ableCommands []string
 	AddCommands(stage, &ableCommands, char)
@@ -25,20 +25,19 @@ func Print(systemMessage *string, stage maps.MapStruct, char unit.Character) {
 	switch stage.GetIsViewedDetail() {
 	case true:
 		firstThing := setIcon(stage.GetThisLocation().ItemType)
+		message.SetItemsAreHere(stage.GetThisLocation().ItemType)
 
 		enemy := ""
 		if stage.GetThisLocation().Unit != types.NoUnit {
 			enemy = types.EnemyIcon
 		}
 
-		*systemMessage = setSystemItemMessage(stage.GetThisLocation().ItemType)
-
 		if firstThing == "" && enemy == "" {
-			*systemMessage = "이 방엔 아무것도 없는 듯 하다..."
+			message.SetRoomIsEmpty()
 		}
 
 		utils.ClearConsoleWindows()
-		fmt.Println(*systemMessage)
+		message.Print()
 		println(utils.GetStringCenter(string(firstThing)+" "+north.Icon+" ", PADDING-len(west.Icon)))
 		println(utils.GetStringCenter(west.Icon+" "+stage.GetNowMap()[stage.GetX()][stage.GetY()].Icon+" "+east.Icon, PADDING))
 		println(utils.GetStringCenter(enemy+south.Icon, PADDING-len(west.Icon)))
@@ -47,11 +46,11 @@ func Print(systemMessage *string, stage maps.MapStruct, char unit.Character) {
 		print(">>>  ")
 	default:
 		if stage.GetThisLocation().ItemType != types.NoItem || stage.GetThisLocation().Unit != types.NoUnit {
-			*systemMessage = "이 방에 무언가 있는 것 같다."
+			message.SetSomethingInRoom()
 		}
 
 		utils.ClearConsoleWindows()
-		fmt.Println(*systemMessage)
+		message.Print()
 		println(utils.GetStringCenter(north.Icon, PADDING-len(west.Icon)))
 		println(utils.GetStringCenter(west.Icon+" "+stage.GetNowMap()[stage.GetX()][stage.GetY()].Icon+" "+east.Icon, PADDING))
 		println(utils.GetStringCenter(south.Icon, PADDING-len(west.Icon)))
@@ -75,22 +74,5 @@ func setIcon(itemType types.UsingItemTypes) types.UsingItemIcons {
 		return types.DroppedWoodSwordIcon
 	default:
 		return types.NoItemIcon
-	}
-}
-
-func setSystemItemMessage(itemType types.UsingItemTypes) string {
-	switch itemType {
-	case types.Chest:
-		return "방에 상자가 있다."
-	case types.Hammer:
-		return "방에 망치가 있다."
-	case types.Key:
-		return "방에 열쇠가 있다."
-	case types.Potion:
-		return "방에 회복약이 있다."
-	case types.DroppedWoodSword:
-		return "방에 목검이 있다."
-	default:
-		return ""
 	}
 }

@@ -66,5 +66,6 @@ func AddOpenDoorCommands(connectingRooms [4]*rooms.Room, ableCommands *[]string)
 func AddDefaultCommands(ableCommands *[]string) {
 	*ableCommands = append(*ableCommands, "<목표> 보기")
 	*ableCommands = append(*ableCommands, "<목표> 줍기")
+	*ableCommands = append(*ableCommands, "<목표> 전투")
 	*ableCommands = append(*ableCommands, "상태")
 }
