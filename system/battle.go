@@ -3,6 +3,7 @@ package system
 import (
 	"escape-room-challenge/types"
 	"escape-room-challenge/unit"
+	"escape-room-challenge/utils"
 	"fmt"
 	"math/rand"
 	"strings"
@@ -10,7 +11,7 @@ import (
 )
 
 func Battle(c *unit.Character, e *unit.Enemy) {
-
+	utils.ClearConsoleWindows()
 	for {
 		if c.Health <= 0 {
 			return
