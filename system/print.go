@@ -42,6 +42,7 @@ func Print(stage maps.MapStruct, char unit.Character) {
 		println(utils.GetStringCenter(west.Icon+" "+stage.GetNowMap()[stage.GetX()][stage.GetY()].Icon+" "+east.Icon, PADDING))
 		println(utils.GetStringCenter(enemy+south.Icon, PADDING-len(west.Icon)))
 		println()
+		fmt.Println("소지품 : ", strings.Join(char.Items, ", "))
 		fmt.Println("행동 : " + strings.Join(ableCommands, ", "))
 		print(">>>  ")
 	default:
@@ -55,6 +56,7 @@ func Print(stage maps.MapStruct, char unit.Character) {
 		println(utils.GetStringCenter(west.Icon+" "+stage.GetNowMap()[stage.GetX()][stage.GetY()].Icon+" "+east.Icon, PADDING))
 		println(utils.GetStringCenter(south.Icon, PADDING-len(west.Icon)))
 		println()
+		fmt.Println("소지품 : ", strings.Join(char.Items, ", "))
 		fmt.Println("행동 : " + strings.Join(ableCommands, ", "))
 		print(">>>  ")
 	}

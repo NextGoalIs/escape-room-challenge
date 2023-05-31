@@ -8,11 +8,10 @@ import (
 )
 
 func AddCommands(stage maps.MapStruct, ableCommands *[]string, char unit.Character) {
-	connectingRooms := stage.GetConnectingRooms()
+	// connectingRooms := stage.GetConnectingRooms()
 
-	AddMoveCommands(connectingRooms, ableCommands)
-	AddUseItemCommands(char.Items, ableCommands)
-	AddOpenDoorCommands(connectingRooms, ableCommands)
+	// AddMoveCommands(connectingRooms, ableCommands)
+	// AddOpenDoorCommands(connectingRooms, ableCommands)
 	AddDefaultCommands(ableCommands)
 }
 
@@ -34,11 +33,11 @@ func AddMoveCommands(connectingRooms [4]*rooms.Room, ableCommands *[]string) {
 	}
 }
 
-func AddUseItemCommands(myItems []string, ableCommands *[]string) {
-	for _, v := range myItems {
-		*ableCommands = append(*ableCommands, v+" 사용")
-	}
-}
+// func AddUseItemCommands(myItems []string, ableCommands *[]string) {
+// 	for _, v := range myItems {
+// 		*ableCommands = append(*ableCommands, v+" 사용")
+// 	}
+// }
 
 func AddOpenDoorCommands(connectingRooms [4]*rooms.Room, ableCommands *[]string) {
 	for _, v := range connectingRooms {
@@ -64,6 +63,10 @@ func AddOpenDoorCommands(connectingRooms [4]*rooms.Room, ableCommands *[]string)
 }
 
 func AddDefaultCommands(ableCommands *[]string) {
+	*ableCommands = append(*ableCommands, "동, 서, 남, 북")
+	*ableCommands = append(*ableCommands, "<목표> 열기")
+	*ableCommands = append(*ableCommands, "<목표> 사용")
+	*ableCommands = append(*ableCommands, "<목표> 장비")
 	*ableCommands = append(*ableCommands, "<목표> 보기")
 	*ableCommands = append(*ableCommands, "<목표> 줍기")
 	*ableCommands = append(*ableCommands, "<목표> 전투")
