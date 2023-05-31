@@ -16,12 +16,16 @@ type Character struct {
 	AttackDamage int
 	Defence      int
 
-	Items        []string
-	EqpShirt     types.ShirtItemTypes
-	EqpPants     types.PantsItemTypes
-	EqpShoes     types.ShoesItemTypes
-	EqpLeftHand  types.WeaponTypes
-	EqpRightHand types.WeaponTypes
+	Items []string
+	EqpItems
+}
+
+type EqpItems struct {
+	Shirt     types.ShirtItemTypes
+	Pants     types.PantsItemTypes
+	Shoes     types.ShoesItemTypes
+	LeftHand  types.WeaponTypes
+	RightHand types.WeaponTypes
 }
 
 func NewCharacter() Character {
@@ -38,7 +42,11 @@ func NewCharacter() Character {
 }
 
 func (c Character) getCalcAttackDamage() int {
-	return c.AttackDamage + types.WeaponDamageMap[c.EqpLeftHand] + types.WeaponDamageMap[c.EqpRightHand]
+	return c.AttackDamage + types.WeaponDamageMap[c.LeftHand] + types.WeaponDamageMap[c.RightHand]
+}
+
+func (c Character) GetCalcDefence() int {
+	return c.Defence + types.ShirtDefenceMap[c.Shirt] + types.PantsDefenceMap[c.Pants] + types.ShoesDefenceMap[c.Shoes]
 }
 
 // TODO 미완
@@ -75,8 +83,8 @@ func (c *Character) ShowStatus() {
 	fmt.Println("캐릭터 이름 : ", c.Name)
 	fmt.Println("장비한 아이템 : ", "미완성 ㅎㅎ;")
 	fmt.Println("체력 : ", c.Health)
-	fmt.Println("공격력 : ") //TODO getCalcAttackDamageDetail로 변경하기
-	fmt.Println("방어력 : ", c.Defence)
+	fmt.Println("공격력 : ", c.getCalcAttackDamage()) //TODO getCalcAttackDamageDetail로 변경하기
+	fmt.Println("방어력 : ", c.GetCalcDefence())
 	fmt.Println("소유한 아이템 : ", strings.Join(c.Items, ", "))
 	fmt.Println()
 	fmt.Println("돌아가려면 Enter키를 눌러주세요")

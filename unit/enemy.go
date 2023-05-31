@@ -14,7 +14,7 @@ type Enemy struct {
 }
 
 func (e Enemy) AttackTo(c *Character) {
-	damage := c.Defence - e.AttackDamage
+	damage := c.GetCalcDefence() - e.AttackDamage
 	if damage >= 0 {
 		return
 	}

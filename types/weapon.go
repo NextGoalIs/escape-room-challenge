@@ -14,3 +14,9 @@ var WeaponDamageMap = map[WeaponTypes]int{
 	WoodSword:    5,
 	IronSword:    10,
 }
+
+var WeaponNameMap = map[WeaponTypes]string{
+	NoWeaponItem: "",
+	WoodSword:    "목검",
+	IronSword:    "철검",
+}
