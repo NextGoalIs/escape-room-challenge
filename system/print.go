@@ -28,7 +28,7 @@ func Print(stage maps.MapStruct, char unit.Character) {
 		GetMessageInstance().SetItemsAreHere(stage.GetThisLocation().ItemType)
 
 		enemy := ""
-		if stage.GetThisLocation().Enemy.Name != "" {
+		if stage.GetThisLocation().Enemy.Name != "" && stage.GetThisLocation().Enemy.Health > 0 {
 			enemy = types.EnemyIcon
 			GetMessageInstance().SetEnemyIsHere(stage.GetThisLocation().Enemy.Name)
 		}

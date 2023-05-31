@@ -4,13 +4,11 @@ func RemoveItem(myItems *[]string, item string) {
 	if len(*myItems) == 1 && (*myItems)[0] == item {
 		*myItems = []string{}
 	} else {
-		newMyItems := []string{}
-		for _, myItem := range *myItems {
+		for i, myItem := range *myItems {
 			if myItem == item {
-				continue
+				*myItems = append((*myItems)[:i], (*myItems)[i+1:]...)
+				break
 			}
-			newMyItems = append(newMyItems, myItem)
 		}
-		*myItems = newMyItems
 	}
 }
