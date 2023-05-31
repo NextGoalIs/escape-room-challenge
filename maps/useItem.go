@@ -21,6 +21,12 @@ func UseItem(selectedCommand string, myItems *[]string, connectingRooms [4]*room
 			return true
 		}
 
+		if item == "회복약" {
+			RemoveItem(myItems, item)
+			//회복시키는 로직
+			return true
+		}
+
 		for _, room := range connectingRooms {
 			isUsed := useHammer(item, room, myItems, thirdCommand)
 			if isUsed {

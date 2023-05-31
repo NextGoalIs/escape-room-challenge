@@ -14,6 +14,7 @@ type Character struct {
 	Icon string
 
 	Health       int
+	MaxHealth    int
 	AttackDamage int
 	Defence      int
 
@@ -34,6 +35,7 @@ func NewCharacter() Character {
 	c.Icon = string(types.MyCharacterIcon)
 
 	c.Health = 50
+	c.MaxHealth = 50
 	c.AttackDamage = 3
 	c.Defence = 0
 
