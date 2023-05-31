@@ -6,7 +6,6 @@ const (
 	NoWeaponItem = iota
 	WoodSword
 	IronSword
-	WoodShield
 )
 
 var WeaponDamageMap = map[WeaponTypes]int{

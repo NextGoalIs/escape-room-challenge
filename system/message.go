@@ -47,6 +47,10 @@ func (m *Message) SetUseItem() {
 	m.content = "아이템을 사용했습니다."
 }
 
+func (m *Message) SetEqpItem() {
+	m.content = "아이템을 장비했습니다."
+}
+
 func (m *Message) SetOpenDoor() {
 	m.content = "문을 열었습니다."
 }

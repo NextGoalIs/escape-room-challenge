@@ -54,6 +54,14 @@ func Act(char *unit.Character, stage *maps.MapStruct) {
 		}
 
 		GetMessageInstance().SetCannotAct()
+	case "장비":
+		if maps.EqpItem(firstCommand, char) {
+			GetMessageInstance().SetEqpItem()
+			stage.SetIsViewedDetail(false)
+			return
+		}
+
+		GetMessageInstance().SetCannotAct()
 	case "열기":
 		if maps.OpenDoor(firstCommand, connectingRooms, &char.Items) {
 			GetMessageInstance().SetOpenDoor()
