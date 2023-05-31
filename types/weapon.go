@@ -8,3 +8,9 @@ const (
 	IronSword
 	WoodShield
 )
+
+var WeaponDamageMap = map[WeaponTypes]int{
+	NoWeaponItem: 0,
+	WoodSword:    5,
+	IronSword:    10,
+}
