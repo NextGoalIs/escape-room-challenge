@@ -30,6 +30,7 @@ func Print(stage maps.MapStruct, char unit.Character) {
 		enemy := ""
 		if stage.GetThisLocation().Enemy.Name != "" {
 			enemy = types.EnemyIcon
+			GetMessageInstance().SetEnemyIsHere(stage.GetThisLocation().Enemy.Name)
 		}
 
 		if firstThing == "" && enemy == "" {
