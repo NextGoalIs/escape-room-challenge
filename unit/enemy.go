@@ -3,6 +3,8 @@ package unit
 import (
 	"fmt"
 	"math"
+	"math/rand"
+	"time"
 )
 
 type Enemy struct {
@@ -11,6 +13,8 @@ type Enemy struct {
 	Health       int
 	AttackDamage int
 	Defence      int
+
+	dropTable map[string]int
 }
 
 func (e Enemy) AttackTo(c *Character) {
@@ -21,18 +25,18 @@ func (e Enemy) AttackTo(c *Character) {
 	c.Health = c.Health + damage
 	fmt.Println(math.Abs(float64(damage)), "만큼의 데미지를 입었습니다.")
 }
-func (e *Enemy) setHealth(h int) {
-	e.Health = h
-}
 
-func (e Enemy) getHelath() int {
-	return e.Health
-}
-
-func (e Enemy) getAttackDamage() int {
-	return e.AttackDamage
-}
-
-func (e Enemy) getDefence() int {
-	return e.Defence
+func (e Enemy) GiveItemTo(userItem []string) string {
+	rand.New(rand.NewSource(time.Now().UnixNano()))
+	n := rand.Intn(100)
+	for item, value := range e.dropTable {
+		if n < value {
+			userItem = append(userItem, item)
+			if item == "회복약회복약" {
+				userItem = append(userItem, item)
+			}
+			return item
+		}
+	}
+	return ""
 }

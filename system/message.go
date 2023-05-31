@@ -2,6 +2,7 @@ package system
 
 import (
 	"escape-room-challenge/types"
+	"escape-room-challenge/unit"
 	"fmt"
 	"sync"
 )
@@ -99,6 +100,10 @@ func (m *Message) SetEnemyIsHere(enemyName string) {
 	m.content = enemyName + "가(이) 있습니다."
 }
 
-func (m *Message) SetYouWin(enemyName string) {
-	m.content = enemyName + "과(와)의 전투에서 승리하셨습니다!"
+func (m *Message) SetYouWin(enemy *unit.Enemy, item string) {
+	m.content = enemy.Name + "과(와)의 전투에서 승리하셨습니다.\n"
+	if item == "" {
+		return
+	}
+	m.content += item + "을(를) 획득하셨습니다."
 }

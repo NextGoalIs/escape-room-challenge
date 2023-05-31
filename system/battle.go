@@ -17,7 +17,8 @@ func Battle(c *unit.Character, e *unit.Enemy) {
 			return
 		}
 		if e.Health <= 0 {
-			GetMessageInstance().SetYouWin(e.Name)
+			dropedItem := e.GiveItemTo(c.Items)
+			GetMessageInstance().SetYouWin(e, dropedItem)
 			return
 		}
 		fmt.Println(string(types.MyCharacterIcon), strings.Repeat(" ", 30), string(types.EnemyIcon))
