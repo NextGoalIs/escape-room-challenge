@@ -3,7 +3,9 @@ package maps
 import (
 	"escape-room-challenge/rooms"
 	"escape-room-challenge/types"
+	"math/rand"
 	"strings"
+	"time"
 )
 
 func UseItem(selectedCommand string, myItems *[]string, connectingRooms [4]*rooms.Room, thirdCommand string) bool {
@@ -11,6 +13,12 @@ func UseItem(selectedCommand string, myItems *[]string, connectingRooms [4]*room
 	for _, item := range *myItems {
 		if !strings.Contains(selectedCommand, item) {
 			continue
+		}
+
+		if item == "상자" {
+			pushChestItemRandomly(myItems)
+			RemoveItem(myItems, item)
+			return true
 		}
 
 		for _, room := range connectingRooms {
@@ -68,4 +76,30 @@ func useKey(item string, room *rooms.Room, myItems *[]string, thirdCommand strin
 
 	RemoveItem(myItems, item)
 	return true
+}
+
+func pushChestItemRandomly(myItems *[]string) {
+	rand.New(rand.NewSource(time.Now().UnixNano()))
+	switch n := rand.Intn(100); {
+	case n < 20:
+		*myItems = append(*myItems, "목검")
+	case n < 36:
+		*myItems = append(*myItems, "철검")
+	case n < 43:
+		*myItems = append(*myItems, "가죽옷")
+	case n < 51:
+		*myItems = append(*myItems, "가죽바지")
+	case n < 61:
+		*myItems = append(*myItems, "가죽신발")
+	case n < 76:
+		*myItems = append(*myItems, "회복약")
+	case n < 86:
+		*myItems = append(*myItems, "회복약")
+		*myItems = append(*myItems, "회복약")
+	case n < 91:
+		*myItems = append(*myItems, "회복약")
+		*myItems = append(*myItems, "회복약")
+		*myItems = append(*myItems, "회복약")
+	default:
+	}
 }
