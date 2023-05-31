@@ -1,41 +1,60 @@
 package rooms
 
 import (
-	"escape-room-challenge/system"
 	"escape-room-challenge/types"
 	"escape-room-challenge/unit"
 )
 
-func (room *Room) PickUpItem(message *system.Message, char *unit.Character) bool {
+func (room *Room) PickUpItem(char *unit.Character, command string) types.UsingItemTypes {
 	switch room.ItemType {
 	case types.NoItem:
-		return false
+		return types.NoItem
 	case types.Key:
-		message.SetPickUpItem(room.ItemType)
+		if command != "열쇠" {
+			return types.NoItem
+		}
+
 		room.ItemType = 0
 		char.Items = append(char.Items, "열쇠")
-		return true
+
+		return room.ItemType
 	case types.Hammer:
-		message.SetPickUpItem(room.ItemType)
+		if command != "망치" {
+			return types.NoItem
+		}
+
 		room.ItemType = 0
 		char.Items = append(char.Items, "망치")
-		return true
+
+		return types.Hammer
 	case types.DroppedWoodSword:
-		message.SetPickUpItem(room.ItemType)
+		if command != "목검" {
+			return types.NoItem
+		}
+
 		room.ItemType = 0
 		char.Items = append(char.Items, "목검")
-		return true
+
+		return types.DroppedWoodSword
 	case types.Chest:
-		message.SetPickUpItem(room.ItemType)
+		if command != "상자" {
+			return types.NoItem
+		}
+
 		room.ItemType = 0
 		char.Items = append(char.Items, "상자")
-		return true
+
+		return types.Chest
 	case types.Potion:
-		message.SetPickUpItem(room.ItemType)
+		if command != "회복약" {
+			return types.NoItem
+		}
+
 		room.ItemType = 0
 		char.Items = append(char.Items, "회복약")
-		return true
+
+		return types.Potion
 	default:
-		return false
+		return types.NoItem
 	}
 }

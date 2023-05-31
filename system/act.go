@@ -74,11 +74,12 @@ func Act(char *unit.Character, message *Message, stage *maps.MapStruct) {
 		message.SetCannotAct()
 		return
 	case "줍기":
-		if stage.GetThisLocation().PickUpItem(message, char) {
-			stage.SetIsViewedDetail(false)
+		if stage.GetThisLocation().ItemType == types.NoItem {
+			message.SetCannotAct()
 			return
 		}
-		message.SetCannotAct()
+
+		message.SetPickUpItem(stage.GetThisLocation().PickUpItem(char, firstCommand))
 		return
 	default:
 		switch firstCommand {
