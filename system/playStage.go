@@ -27,6 +27,10 @@ func PlayStage2(char unit.Character) {
 			utils.PrintWIN()
 			break
 		}
+		if char.Health <= 0 {
+			utils.PrintYouDie()
+			break
+		}
 		Print(stage, char)
 		Act(&char, &stage)
 	}

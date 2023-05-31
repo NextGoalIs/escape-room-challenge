@@ -9,7 +9,7 @@ func main() {
 
 	char := unit.NewCharacter()
 
-	system.PlayStage1(char)
+	// system.PlayStage1(char)
 	system.PlayStage2(char)
 
 }

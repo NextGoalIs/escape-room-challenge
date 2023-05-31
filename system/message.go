@@ -10,6 +10,7 @@ type Message struct {
 	content string
 }
 
+// Singleton
 var instance *Message
 var once sync.Once
 
@@ -21,6 +22,7 @@ func GetMessageInstance() *Message {
 	return instance
 }
 
+// receivers
 func (m Message) Print() {
 	fmt.Println(m.content)
 }
@@ -86,5 +88,9 @@ func (m *Message) SetCompleteRun() {
 }
 
 func (m *Message) SetFailRun() {
-	m.content = "도망에 실패했습니다."
+	m.content = "도망에 실패했습니다. 한 대 얻어맞았습니다."
+}
+
+func (m *Message) SetYouWin(enemyName string) {
+	m.content = enemyName + "과(와)의 전투에서 승리하셨습니다!"
 }
