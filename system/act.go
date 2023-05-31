@@ -47,7 +47,7 @@ func Act(char *unit.Character, stage *maps.MapStruct) {
 		Battle(char, &stage.GetThisLocation().Enemy)
 
 	case "사용":
-		if maps.UseItem(firstCommand, &char.Items, connectingRooms, thirdCommand) {
+		if maps.UseItem(firstCommand, &char.Items, connectingRooms, thirdCommand, char) {
 			GetMessageInstance().SetUseItem()
 			stage.SetIsViewedDetail(false)
 			return

@@ -3,12 +3,13 @@ package maps
 import (
 	"escape-room-challenge/rooms"
 	"escape-room-challenge/types"
+	"escape-room-challenge/unit"
 	"math/rand"
 	"strings"
 	"time"
 )
 
-func UseItem(selectedCommand string, myItems *[]string, connectingRooms [4]*rooms.Room, thirdCommand string) bool {
+func UseItem(selectedCommand string, myItems *[]string, connectingRooms [4]*rooms.Room, thirdCommand string, char *unit.Character) bool {
 
 	for _, item := range *myItems {
 		if !strings.Contains(selectedCommand, item) {
@@ -23,7 +24,10 @@ func UseItem(selectedCommand string, myItems *[]string, connectingRooms [4]*room
 
 		if item == "회복약" {
 			RemoveItem(myItems, item)
-			//회복시키는 로직
+			char.Health += 30
+			if char.Health > char.MaxHealth {
+				char.Health = char.MaxHealth
+			}
 			return true
 		}
 
