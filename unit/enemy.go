@@ -8,7 +8,7 @@ type Enemy struct {
 	Defence      int
 }
 
-func (e Enemy) AttackTo(c Character) {
+func (e Enemy) AttackTo(c *Character) {
 	damage := c.Defence - e.AttackDamage
 	if damage >= 0 {
 		return

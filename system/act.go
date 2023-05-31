@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func Act(char *unit.Character, message *Message, stage *maps.MapStruct) {
+func Act(char *unit.Character, stage *maps.MapStruct) {
 
 	input := Scan()
 
@@ -35,71 +35,71 @@ func Act(char *unit.Character, message *Message, stage *maps.MapStruct) {
 	switch secondCommand {
 	case "전투":
 		if !stage.GetIsViewedDetail() {
-			message.SetCannotAct()
+			GetMessageInstance().SetCannotAct()
 			return
 		}
 
-		if stage.GetThisLocation().Unit == types.NoUnit {
-			message.SetCannotAct()
+		if stage.GetThisLocation().Enemy.Name == "" {
+			GetMessageInstance().SetCannotAct()
 			return
 		}
 
-		// Battle(char, e)
+		Battle(char, &stage.GetThisLocation().Enemy)
 
 	case "사용":
 		if maps.UseItem(firstCommand, &char.Items, connectingRooms, thirdCommand) {
-			message.SetUseItem()
+			GetMessageInstance().SetUseItem()
 			stage.SetIsViewedDetail(false)
 			return
 		}
 
-		message.SetCannotAct()
+		GetMessageInstance().SetCannotAct()
 	case "열기":
 		if maps.OpenDoor(firstCommand, connectingRooms, &char.Items) {
-			message.SetOpenDoor()
+			GetMessageInstance().SetOpenDoor()
 			stage.SetIsViewedDetail(false)
 			return
 		}
 
-		message.SetCannotAct()
+		GetMessageInstance().SetCannotAct()
 	case "보기":
 		switch firstCommand {
 		case "방":
 			stage.SetIsViewedDetail(true)
-			message.SetEmptyString()
+			GetMessageInstance().SetEmptyString()
 			return
 		default:
-			message.SetCannotAct()
+			GetMessageInstance().SetCannotAct()
 		}
-		message.SetCannotAct()
+		GetMessageInstance().SetCannotAct()
 		return
 	case "줍기":
 		if stage.GetThisLocation().ItemType == types.NoItem {
-			message.SetCannotAct()
+			GetMessageInstance().SetCannotAct()
 			return
 		}
 
-		message.SetPickUpItem(stage.GetThisLocation().PickUpItem(char, firstCommand))
+		GetMessageInstance().SetPickUpItem(stage.GetThisLocation().PickUpItem(char, firstCommand))
 		return
 	default:
 		switch firstCommand {
 		case "상태":
 			char.ShowStatus()
-			message.SetEmptyString()
+			GetMessageInstance().SetEmptyString()
 			return
 		case "동", "서", "남", "북":
 			if maps.Move(firstCommand, stage) {
 				stage.SetIsViewedDetail(false)
-				message.SetEmptyString()
+				GetMessageInstance().SetEmptyString()
 				return
 			}
 
 			stage.SetIsViewedDetail(false)
-			message.SetCannotAct()
+			GetMessageInstance().SetCannotAct()
 			return
 		default:
 			stage.SetIsViewedDetail(false)
-			message.SetCannotAct()
+			GetMessageInstance().SetCannotAct()
 			return
 		}
 	}

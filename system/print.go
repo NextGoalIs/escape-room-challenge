@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-func Print(message *Message, stage maps.MapStruct, char unit.Character) {
+func Print(stage maps.MapStruct, char unit.Character) {
 
 	var ableCommands []string
 	AddCommands(stage, &ableCommands, char)
@@ -25,19 +25,19 @@ func Print(message *Message, stage maps.MapStruct, char unit.Character) {
 	switch stage.GetIsViewedDetail() {
 	case true:
 		firstThing := setIcon(stage.GetThisLocation().ItemType)
-		message.SetItemsAreHere(stage.GetThisLocation().ItemType)
+		GetMessageInstance().SetItemsAreHere(stage.GetThisLocation().ItemType)
 
 		enemy := ""
-		if stage.GetThisLocation().Unit != types.NoUnit {
+		if stage.GetThisLocation().Enemy.Name != "" {
 			enemy = types.EnemyIcon
 		}
 
 		if firstThing == "" && enemy == "" {
-			message.SetRoomIsEmpty()
+			GetMessageInstance().SetRoomIsEmpty()
 		}
 
 		utils.ClearConsoleWindows()
-		message.Print()
+		GetMessageInstance().Print()
 		println(utils.GetStringCenter(string(firstThing)+" "+north.Icon+" ", PADDING-len(west.Icon)))
 		println(utils.GetStringCenter(west.Icon+" "+stage.GetNowMap()[stage.GetX()][stage.GetY()].Icon+" "+east.Icon, PADDING))
 		println(utils.GetStringCenter(enemy+south.Icon, PADDING-len(west.Icon)))
@@ -45,12 +45,12 @@ func Print(message *Message, stage maps.MapStruct, char unit.Character) {
 		fmt.Println("행동 : " + strings.Join(ableCommands, ", "))
 		print(">>>  ")
 	default:
-		if stage.GetThisLocation().ItemType != types.NoItem || stage.GetThisLocation().Unit != types.NoUnit {
-			message.SetSomethingInRoom()
+		if stage.GetThisLocation().ItemType != types.NoItem || stage.GetThisLocation().Enemy.Name != "" {
+			GetMessageInstance().SetSomethingInRoom()
 		}
 
 		utils.ClearConsoleWindows()
-		message.Print()
+		GetMessageInstance().Print()
 		println(utils.GetStringCenter(north.Icon, PADDING-len(west.Icon)))
 		println(utils.GetStringCenter(west.Icon+" "+stage.GetNowMap()[stage.GetX()][stage.GetY()].Icon+" "+east.Icon, PADDING))
 		println(utils.GetStringCenter(south.Icon, PADDING-len(west.Icon)))

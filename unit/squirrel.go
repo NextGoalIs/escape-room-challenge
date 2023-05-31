@@ -1,8 +1,7 @@
 package unit
 
-type Squirrel struct {
-	Name string
+func NewSquirrel() Enemy {
+	e := Enemy{Name: "다람쥐", Health: 50, AttackDamage: 5, Defence: 0}
 
-	AttackDamage int
-	Defence      int
+	return e
 }

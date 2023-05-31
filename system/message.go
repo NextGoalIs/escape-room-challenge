@@ -3,10 +3,22 @@ package system
 import (
 	"escape-room-challenge/types"
 	"fmt"
+	"sync"
 )
 
 type Message struct {
 	content string
+}
+
+var instance *Message
+var once sync.Once
+
+func GetMessageInstance() *Message {
+	once.Do(func() {
+		instance = &Message{}
+	})
+
+	return instance
 }
 
 func (m Message) Print() {
@@ -67,4 +79,12 @@ func (m *Message) SetPickUpItem(item types.UsingItemTypes) {
 		m.content = "회복약을 획득했다."
 	default:
 	}
+}
+
+func (m *Message) SetCompleteRun() {
+	m.content = "성공적으로 도망쳤습니다."
+}
+
+func (m *Message) SetFailRun() {
+	m.content = "도망에 실패했습니다."
 }

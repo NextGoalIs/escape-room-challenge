@@ -2,19 +2,20 @@ package rooms
 
 import (
 	"escape-room-challenge/types"
+	"escape-room-challenge/unit"
 )
 
 type Room struct {
 	Icon string
 
-	Unit     types.UnitTypes
+	Enemy    unit.Enemy
 	DoorType types.DoorTypes
 	ItemType types.UsingItemTypes
 	IsGoal   bool
 	IsWall   bool
 }
 
-func NewRoom(doorType types.DoorTypes, itemType types.UsingItemTypes, isGoal bool, unitType types.UnitTypes) Room {
+func NewRoom(doorType types.DoorTypes, itemType types.UsingItemTypes, isGoal bool, enemyType types.UnitTypes) Room {
 
 	room := Room{Icon: "🔳"}
 
@@ -38,10 +39,15 @@ func NewRoom(doorType types.DoorTypes, itemType types.UsingItemTypes, isGoal boo
 		room.ItemType = itemType
 	}
 
-	switch unitType {
+	switch enemyType {
+	case types.Deer:
+		room.Enemy = unit.NewDear()
+	case types.Rabbit:
+		room.Enemy = unit.NewRabbit()
+	case types.Squirrel:
+		room.Enemy = unit.NewSquirrel()
 	case types.NoUnit:
 	default:
-		room.Unit = unitType
 	}
 
 	if isGoal {
