@@ -18,7 +18,8 @@ func Battle(c *unit.Character, e *unit.Enemy) {
 		}
 		if e.Health <= 0 {
 			dropedItem := e.GiveItemTo(c.Items)
-			GetMessageInstance().SetYouWin(e, dropedItem)
+			GetMessageInstance().SetYouWin(e)
+			GetMessageInstance().SetGetItem(dropedItem)
 			return
 		}
 		fmt.Println(string(types.MyCharacterIcon), strings.Repeat(" ", 30), string(types.EnemyIcon))
@@ -41,7 +42,7 @@ func Battle(c *unit.Character, e *unit.Enemy) {
 			default:
 				//도망 실패
 				GetMessageInstance().SetFailRun()
-				GetMessageInstance().Print()
+				GetMessageInstance().Flush()
 				e.AttackTo(c)
 			}
 		default:

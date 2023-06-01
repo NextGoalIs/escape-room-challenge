@@ -38,7 +38,7 @@ func Print(stage maps.MapStruct, char unit.Character) {
 		}
 
 		utils.ClearConsoleWindows()
-		GetMessageInstance().Print()
+		GetMessageInstance().Flush()
 		println(utils.GetStringCenter(string(firstThing)+" "+north.Icon+" ", PADDING-len(west.Icon)))
 		println(utils.GetStringCenter(west.Icon+" "+stage.GetNowMap()[stage.GetX()][stage.GetY()].Icon+" "+east.Icon, PADDING))
 		println(utils.GetStringCenter(enemy+south.Icon, PADDING-len(west.Icon)))
@@ -52,7 +52,7 @@ func Print(stage maps.MapStruct, char unit.Character) {
 		}
 
 		utils.ClearConsoleWindows()
-		GetMessageInstance().Print()
+		GetMessageInstance().Flush()
 		println(utils.GetStringCenter(north.Icon, PADDING-len(west.Icon)))
 		println(utils.GetStringCenter(west.Icon+" "+stage.GetNowMap()[stage.GetX()][stage.GetY()].Icon+" "+east.Icon, PADDING))
 		println(utils.GetStringCenter(south.Icon, PADDING-len(west.Icon)))
